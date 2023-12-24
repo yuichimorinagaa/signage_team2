@@ -22,7 +22,7 @@ services:
       - ./laravel:/work/laravel
 
   db:
-    platform: linux/amd64
+    platform: linux/amd64 # for M1 Mac
     build:
       context: .
       dockerfile: ./infra/docker/mysql/Dockerfile

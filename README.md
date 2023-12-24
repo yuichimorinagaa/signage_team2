@@ -1,5 +1,5 @@
 # このアプリについて
-学習用で使う空のcrud-tempです。
+学習用で使うcrud-tempです。
 # 環境について
 ## 概要
 ## 使い方
@@ -23,7 +23,7 @@ echo "export DOCKER_CONTENT_TRUST=1" >> ~/.bashrc
 
 ③clone
 ```bash
-git clone https://github.com/sdb-interns/empty-crud-temp-10.git practice-crud-temp
+git clone https://github.com/sdb-interns/empty-crud-temp-10.git empty-crud-temp
 ```
 
 
@@ -35,7 +35,15 @@ cp ./laravel/.env.example ./laravel/.env # 必要なものを設定
 ここも自分のプロジェクトのディレクトリへ移動。環境変数は特に変更したりする必要はないと思う。ポート番号も競合しなさそうな番号に変えておいた。
 
 ⑤実行環境
-※ここで、Windowsの人は[こちらのサイト](https://bluebirdofoz.hatenablog.com/entry/2019/10/24/221517)を見てGNUをインストールする
+#### M1 Macの人
+M1系列のCPU(M1, M2, M2 Proなど)を搭載しているMacを使用している方は、`docker-compose.yml`ファイルを開いて以下の行のコメントアウトを外す
+```yml
+platform: linux/amd64
+```
+
+#### Windowsの人
+Windowsの人は[こちらのサイト](https://bluebirdofoz.hatenablog.com/entry/2019/10/24/221517)を見てGNUをインストールする
+
 ※Windowsの人は原因不明だけどpowershellだとうまくいかなかったのでcmdで実行
 ```bash(Winはcmd)
 make init
