@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3257e71-5152-4633-8871-0beb8127978c" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/laravel/database/migrations/2024_06_21_095819_create_files_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/laravel/database/migrations/2024_06_21_095819_create_files_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e8581283-fe42-477a-9284-403f70cec780.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e8581283-fe42-477a-9284-403f70cec780.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,12 +19,12 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="test_inagaki_0621" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\PHP\php-8.3.6-Win32-vs16-x64\php.exe">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/opt/homebrew/Cellar/php/8.3.7/bin/php">
     <include_path>
       <path value="$PROJECT_DIR$/laravel/vendor/composer" />
       <path value="$PROJECT_DIR$/laravel/vendor/psr/clock" />
@@ -153,7 +152,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;database&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu-18.04/home/gakutofurukawa/signage_team2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
