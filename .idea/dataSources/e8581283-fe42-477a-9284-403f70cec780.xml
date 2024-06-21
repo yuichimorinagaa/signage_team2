@@ -910,7 +910,7 @@
     </schema>
     <schema id="289" parent="1" name="laravel">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-06-21.10:36:13</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-06-21.11:32:18</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="290" parent="1" name="laravel_test">
@@ -1100,7 +1100,7 @@ tokenable_id</ColNames>
       <UnderlyingIndexName>personal_access_tokens_token_unique</UnderlyingIndexName>
     </key>
     <column id="332" parent="304" name="id">
-      <AutoIncrement>1</AutoIncrement>
+      <AutoIncrement>2</AutoIncrement>
       <DasType>bigint unsigned|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
