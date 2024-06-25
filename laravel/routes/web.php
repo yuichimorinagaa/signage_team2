@@ -26,4 +26,5 @@ Route::post('users/',[UserController::class,'store'])->name('user.store');
 
 Route::get('users/file',[FileController::class,'index'])->name('file.index');
 Route::post('users/file', [FileController::class,'store'])->name('file.store');
-Route::post('users/file', [FileController::class, 'delete'])->name('file.delete');
+
+Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.delete');

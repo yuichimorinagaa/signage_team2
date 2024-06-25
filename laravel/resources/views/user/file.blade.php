@@ -18,9 +18,9 @@
 
     <div>
         <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明">
-        <form action="{{ route('user.file') }}" method="post">
+        <form action="{{ route('user.file',['id'=>$file->id]) }}" method="POST">
             @csrf
-            @method('delete')
+            @method('DELETE')
             <button type="submit">削除</button>
         </form>
     </div>

@@ -36,11 +36,10 @@ class FileController extends Controller
     }
 
 
-    public function delete(File $file)
+    public function delete($id)
     {
-
+        $file = File::find($id);
         Storage::delete('storage/image/'. $file->file_path);
-
 
         $file->delete();
 
