@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<form action="{{route('user.file')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('file.store')}}" method="post" enctype="multipart/form-data">
     @csrf
     <input type="file" name="image" >
     <input type="submit" value="投稿">
@@ -18,7 +18,7 @@
 
     <div>
         <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明">
-        <form action="{{ route('user.file',['id'=>$file->id]) }}" method="POST">
+        <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit">削除</button>
