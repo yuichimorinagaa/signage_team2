@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +22,7 @@ Route::get('/', function () {
 Route::get('users',[UserController::class,'index'])->name('user.index');
 Route::get('users/create',[UserController::class,'create'])->name('user.create');
 Route::post('users/',[UserController::class,'store'])->name('user.store');
+
+
+Route::get('users/file',[FileController::class,'index'])->name('file.index');
+Route::post('users/file', [FileController::class,'store'])->name('file.store');
