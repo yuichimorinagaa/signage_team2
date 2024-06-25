@@ -13,5 +13,9 @@
     <input type="file" name="image" >
     <input type="submit" value="投稿">
 </form>
+@foreach($image as $file)
+    <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明">
+@endforeach
+
 </body>
 </html>
