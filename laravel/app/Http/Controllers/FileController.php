@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\File;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -32,5 +33,17 @@ class FileController extends Controller
         // データベースからすべてのファイルを取得してビューに渡す
         $image = File::all();
         return view('user.file', compact('image'));
+    }
+
+
+    public function delete(File $file)
+    {
+
+        Storage::delete('storage/image/'. $file->file_path);
+
+
+        $file->delete();
+
+        return redirect()->route('file.index')->with('success', '画像を削除しました。');
     }
 }

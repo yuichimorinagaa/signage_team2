@@ -14,7 +14,18 @@
     <input type="submit" value="投稿">
 </form>
 @foreach($image as $file)
-    <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明">
+
+
+    <div>
+        <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明">
+        <form action="{{ route('user.file') }}" method="post">
+            @csrf
+            @method('delete')
+            <button type="submit">削除</button>
+        </form>
+    </div>
+
+
 @endforeach
 
 </body>
