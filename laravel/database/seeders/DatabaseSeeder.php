@@ -2,17 +2,32 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class DatabaseSeeder extends Seeder
+class FileTableSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
-     *
-     * @return void
+     * Run the database seeds.
      */
     public function run(): void
     {
-        $this->call(UserTableSeeder::class);
+        DB::table('files')->insert([
+            'user_id' => 1,
+            'file_path' => 'first_sample_file',
+        ]);
+        DB::table('files')->insert([
+            'user_id' => 2,
+            'file_path' => 'second_sample_file',
+        ]);
+        DB::table('files')->insert([
+            'user_id' => 3,
+            'file_path' => 'third_sample_file',
+        ]);
+        DB::table('files')->insert([
+            'user_id' => 3,
+            'file_path' => 'fourth_sample_file',
+        ]);
     }
 }
