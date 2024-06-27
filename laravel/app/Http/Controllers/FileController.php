@@ -31,8 +31,8 @@ class FileController extends Controller
     public function index()
     {
         // データベースからすべてのファイルを取得してビューに渡す
-        $image = File::all();
-        return view('user.file', compact('image'));
+        $files = File::all();
+        return view('user.file', compact('files'));
     }
 
 

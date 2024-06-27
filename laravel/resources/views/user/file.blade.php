@@ -13,11 +13,11 @@
 <h2>画像選択画面</h2>
 <form action="{{route('file.store')}}" method="post" enctype="multipart/form-data">
     @csrf
-    <input type="file" name="image" >
+    <input type="file" name="files" >
     <input type="submit" class="btn btn-primary " value="投稿">
 </form>
 
-@foreach($image as $file)
+@foreach($files as $file)
     <div>
         <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明">
         <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
