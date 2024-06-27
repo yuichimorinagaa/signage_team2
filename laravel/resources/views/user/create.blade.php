@@ -9,17 +9,26 @@
 </head>
 <body>
 <h1>新規登録</h1>
-<form action="{{route('user.store')}}">
-    <label for="user">ユーザー名</label>
-    <input type="text" id="name" name="name">
-    <label for="email">メールアドレス</label>
-    <input type="text" name="email" id="email00">
-    <label for="password">パスワード</label>
-    <input type="text" id="password" name="password">
-    <label for="code">招待コード</label>
-    <input type="text" id="code" name="code">
-    <button>送信</button>
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
+<form action="{{route('user.store')}}" method="post">
+    @csrf
+    <label for="email">メールアドレス</label>
+    <input type="text" name="email" id="email">
+    <label for="password">パスワード</label>
+    <input type="password" id="password" name="password">
+    <label for="invitation_code">招待コード</label>
+    <input type="text" id="invitation_code" name="invitation_code">
+    <button type="submit">送信</button>
 </form>
+<a href="{{route('user.index')}}">ログイン画面へ戻る</a>
 </body>
 </html>

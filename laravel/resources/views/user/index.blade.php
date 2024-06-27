@@ -9,14 +9,20 @@
 </head>
 <body>
 <h1>ログイン画面</h1>
-<form action="">
-    <label for="name">ユーザー名</label>
-    <input type="text" id="name" name="name">
+<form action="{{route('user.login')}}" method="post">
+    @error('email')
+    <div>{{$message}}</div>
+    @enderror
+    @csrf
     <label for="email">メールアドレス</label>
     <input type="text" id="email" name="email">
+    @error('password')
+    <div>{{$message}}</div>
+    @enderror
     <label for="password">パスワード</label>
-    <input type="text" id="password" name="password">
-    <button>ログイン</button>
+    <input type="password" id="password" name="password">
+
+    <button type="submit">ログイン</button>
 </form>
 <a href="{{route('user.create')}}">新規登録</a>
 </body>

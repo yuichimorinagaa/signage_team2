@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,9 @@ Route::post('tests/upload',[TestController::class, 'upload'])->name('tests.uploa
 Route::get('users',[UserController::class,'index'])->name('user.index');
 Route::get('users/create',[UserController::class,'create'])->name('user.create');
 Route::post('users/',[UserController::class,'store'])->name('user.store');
+Route::get('admin',[UserController::class,'admin'])->name('user.admin');
+Route::delete('users/{id}',[UserController::class,'delete'])->name('user.delete');
+Route::post('login',[LoginController::class,'login'])->name('user.login');
+Route::middleware('auth')->group(function(){
+    Route::get('only/login',[LoginController::class,'show'])->name('only.login');
+});
