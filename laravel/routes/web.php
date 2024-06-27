@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,8 @@ Route::post('login',[LoginController::class,'login'])->name('user.login');
 Route::middleware('auth')->group(function(){
     Route::get('only/login',[LoginController::class,'show'])->name('only.login');
 });
+
+
+Route::get('users/file',[FileController::class,'index'])->name('file.index');
+Route::post('users/file', [FileController::class,'store'])->name('file.store');
+Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.delete');
