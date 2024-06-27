@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('tests',[TestController::class,'index'])->name('tests.index');
+Route::post('tests/upload',[TestController::class, 'upload'])->name('tests.upload');
 
 Route::get('users',[UserController::class,'index'])->name('user.index');
 Route::get('users/create',[UserController::class,'create'])->name('user.create');
