@@ -23,7 +23,7 @@
         <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
             @csrf
             @method('DELETE')
-            <button type="button" class="btn btn-primary ">削除</button>
+            <button type="submit" class="btn btn-primary ">削除</button>
         </form>
     </div>
 @endforeach
