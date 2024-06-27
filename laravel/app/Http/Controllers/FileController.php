@@ -11,9 +11,9 @@ class FileController extends Controller
     public function store(Request $request)
     {
         // ファイルがアップロードされているか確認
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('file')) {
             // ファイルを保存し、パスを取得
-            $filePath = $request->file('image')->store('public/image');
+            $filePath = $request->file('file')->store('public/image');
 
             // ファイルパスをモデルに保存
             $file = new File;

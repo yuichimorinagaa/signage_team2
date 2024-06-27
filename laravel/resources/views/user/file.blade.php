@@ -13,7 +13,7 @@
 <h2>画像選択画面</h2>
 <form action="{{route('file.store')}}" method="post" enctype="multipart/form-data">
     @csrf
-    <input type="file" name="files" >
+    <input type="file" name="file" >
     <input type="submit" class="btn btn-primary " value="投稿">
 </form>
 
