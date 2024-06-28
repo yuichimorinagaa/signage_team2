@@ -2,31 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Model\User;
+use App\Models\User;
 
 class LoginController extends Controller
 {
+    public function loginShow(){
+        return view('login.index');
+    }
     public function show(){
         return view('test.show');
     }
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
 
-        $credentials=$request->validate([
-            'email'=>['required','email'],
-            'password'=>['required'],
-        ],[
-            'email.required'=>'メールアドレスを入力してください',
-            'password.required'=>'パスワードを入力してください。',
-        ]);
+
+        $credentials=$request->only('email','password');
+
         if (Auth::attempt($credentials)){
             $request->session()->regenerate();
 
             return redirect()->route('only.login');
         }
-        return redirect()->route('user.index')->withErrors([
+        return redirect()->route('login.index')->withErrors([
             'email'=>'メールアドレスまたはパスワードが間違っています。',
         ]);
     }

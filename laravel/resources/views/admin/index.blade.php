@@ -13,7 +13,7 @@
 @foreach($users as $user)
     <p>
     {{$user->email}}
-    <form action="{{route('user.delete',['id'=>$user->id])}}" method="post">
+    <form action="{{route('admin.delete',['id'=>$user->id])}}" method="post">
         @method('delete')
         @csrf
         <button>削除する</button>

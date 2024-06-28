@@ -24,6 +24,6 @@
 
     <button type="submit">ログイン</button>
 </form>
-<a href="{{route('user.create')}}">新規登録</a>
+<a href="{{route('register.index')}}">新規登録</a>
 </body>
 </html>

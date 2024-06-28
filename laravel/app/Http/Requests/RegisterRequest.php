@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,7 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'email.required' => 'メールアドレスは必須です',
-            'password.required' => 'パスワードは必須です',
+            'password.required' => 'パスワードを入力してください。',
             'invitation_code.required'=>'招待コードを入力してください。',
             'invitation_code.in'=>'招待コードが正しくありません。'
         ];

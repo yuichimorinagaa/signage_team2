@@ -19,7 +19,7 @@
     </div>
 @endif
 
-<form action="{{route('user.store')}}" method="post">
+<form action="{{route('login.store')}}" method="post">
     @csrf
     <label for="email">メールアドレス</label>
     <input type="text" name="email" id="email">
@@ -29,6 +29,6 @@
     <input type="text" id="invitation_code" name="invitation_code">
     <button type="submit">送信</button>
 </form>
-<a href="{{route('user.index')}}">ログイン画面へ戻る</a>
+<a href="{{route('login.index')}}">ログイン画面へ戻る</a>
 </body>
 </html>
