@@ -18,7 +18,6 @@
         @csrf
         <button>削除する</button>
     </form>
-    </p>
 @endforeach
 </body>
 </html>
