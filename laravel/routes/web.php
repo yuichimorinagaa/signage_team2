@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PreviewController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FileController;
@@ -31,3 +32,8 @@ Route::post('users/',[UserController::class,'store'])->name('user.store');
 Route::get('users/file',[FileController::class,'index'])->name('file.index');
 Route::post('users/file', [FileController::class,'store'])->name('file.store');
 Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.delete');
+
+
+Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index');
+Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
+Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');
