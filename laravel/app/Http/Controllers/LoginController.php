@@ -23,7 +23,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)){
             $request->session()->regenerate();
 
-            return redirect()->route('only.login');
+            return redirect()->route('file.index');
         }
         return redirect()->route('login.index')->withErrors([
             'email'=>'メールアドレスまたはパスワードが間違っています。',

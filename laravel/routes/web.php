@@ -29,14 +29,13 @@ Route::post('tests/upload',[TestController::class, 'upload'])->name('tests.uploa
 Route::get('login',[LoginController::class,'loginShow'])->name('login.index');
 Route::get('register',[RegisterController::class,'registerShow'])->name('register.index');
 Route::post('register/',[RegisterController::class,'store'])->name('login.store');
-Route::get('admin',[AdminController::class,'adminShow'])->name('admin.index');
-Route::delete('admin/{id}',[AdminController::class,'delete'])->name('admin.delete');
 Route::post('login',[LoginController::class,'login'])->name('user.login');
 Route::middleware('auth')->group(function(){
-    Route::get('only/login',[LoginController::class,'show'])->name('only.login');
+    Route::get('admin',[AdminController::class,'adminShow'])->name('admin.index');
+    Route::delete('admin/{id}',[AdminController::class,'delete'])->name('admin.delete');
+    Route::get('users/file',[FileController::class,'index'])->name('file.index');
 });
 
 
-Route::get('users/file',[FileController::class,'index'])->name('file.index');
 Route::post('users/file', [FileController::class,'store'])->name('file.store');
 Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.delete');
