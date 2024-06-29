@@ -39,3 +39,4 @@ Route::middleware('auth')->group(function(){
 
 Route::post('users/file', [FileController::class,'store'])->name('file.store');
 Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.delete');
+
