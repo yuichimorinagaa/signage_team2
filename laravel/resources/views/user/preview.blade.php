@@ -6,11 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        .grayscale{
-            filter: grayscale(100%);
-        }
-    </style>
 </head>
 <body>
 <h1>プレビュー</h1>
@@ -26,9 +21,9 @@
         @foreach($files as $file)
             <div>
                 <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明"
-                    class="{{ $file->status == 1 ? 'grayscale' : '' }}">
+                    class="{{ $file->status == 1 ? 'checked' : '' }}">
                 <input type="checkbox" name="files[]" value="{{ $file->id }}"
-                    {{ $file->status == 1 ? 'disabled' : '' }}>
+                    {{ $file->status == 1 ? 'checked' : '' }}>
             </div>
       @endforeach
       <button type="submit">使用</button>

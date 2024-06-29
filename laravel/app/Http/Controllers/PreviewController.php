@@ -13,10 +13,11 @@ class PreviewController extends Controller
     }
 
     public function update(Request $request){
-        if($request->has('files')){
-            File::whereIn('id', $request->input('files'))->update(['status' => 1]);
+        $selectedFiles = $request->input('files', []);
+        if(!empty($selectedFiles)){
+            File::whereIn('id', $selectedFiles)->update(['status' => 1]);
         }
-
+        File::whereNotIn('id', $selectedFiles)->update(['status' => 0]);
         return redirect()->route('preview.index')->with('success', '更新しました');
     }
 
