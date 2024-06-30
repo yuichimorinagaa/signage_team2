@@ -11,11 +11,20 @@
 </head>
 <body>
 <h2>画像選択画面</h2>
+
+@if($errors->any())
+    <div class="alert alert-danger">
+        画像ファイルが選択されていません
+    </div>
+@endif
+
+
 <form action="{{route('file.store')}}" method="post" enctype="multipart/form-data">
     @csrf
     <input type="file" name="file" >
     <input type="submit" class="btn btn-primary " value="投稿">
 </form>
+
 
 @foreach($files as $file)
     <div>

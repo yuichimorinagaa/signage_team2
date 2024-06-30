@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\File;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\FileUploadRequest;
 
 class FileController extends Controller
 {
     public function store(Request $request)
     {
         // ファイルがアップロードされているか確認
-        if ($request->hasFile('file')) {
+        //if ($request->hasFile('file')) {
             // ファイルを保存し、パスを取得
+
+            $request->validate([
+                'file' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
             $filePath = $request->file('file')->store('public/image');
 
             // ファイルパスをモデルに保存
@@ -22,10 +28,10 @@ class FileController extends Controller
 
             // 成功した場合のリダイレクト
             return redirect()->route('file.index')->with('success', 'ファイルが正常にアップロードされました。');
-        } else {
+        //} else {
             // ファイルがアップロードされなかった場合のエラーメッセージを返す
-            return redirect()->back()->with('error', 'ファイルを選択してください。');
-        }
+            //return redirect()->back()->with('error', 'ファイルを選択してください。');
+        //}
     }
 
     public function index()
