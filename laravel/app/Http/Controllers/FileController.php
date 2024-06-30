@@ -29,7 +29,7 @@ class FileController extends Controller
             $file->save();
 
             // 成功した場合のリダイレクト
-            return redirect()->route('file.index')->with('success', 'ファイルが正常にアップロードされました。');
+            //return redirect()->route('file.index')->with('success', 'ファイルが正常にアップロードされました。');
         //} else {
             // ファイルがアップロードされなかった場合のエラーメッセージを返す
             //return redirect()->back()->with('error', 'ファイルを選択してください。');
