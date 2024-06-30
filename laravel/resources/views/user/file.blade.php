@@ -25,6 +25,12 @@
     <input type="submit" class="btn btn-primary " value="投稿">
 </form>
 
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 
 @foreach($files as $file)
     <div>
