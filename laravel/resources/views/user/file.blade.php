@@ -10,13 +10,15 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body>
-<h2 ><span>画像選択画面</span></h2>
+<h2>画像選択画面</h2>
 
 @if($errors->any())
     <div class="alert alert-danger">
         画像ファイルが選択されていません
     </div>
 @endif
+
+<div id="selectedCount">選択された画像: 0</div>
 
 
 <form action="{{route('file.store')}}" method="post" enctype="multipart/form-data">
@@ -47,6 +49,8 @@
 @endforeach
 </div>
 
+
+
 <!-- 大きな画像を表示するための領域（初期は非表示にしておく） -->
 <div id="largeImageContainer" style="display: none;">
     <img src="" alt="Large Image" id="largeImage">
@@ -72,13 +76,20 @@
     // 選択ボタンをクリックして選択する処理
     document.querySelectorAll('.select-image').forEach(function(selectButton) {
         selectButton.addEventListener('click', function() {
-            toggleSelection(this.parentNode); // 親要素（.show_image_container）を選択状態にする
+            toggleSelection(this.closest('.show_image_container')); // 親要素（.show_image_container）を選択状態にする
+            updateSelectedCount(); // 選択された画像の数を更新する
         });
     });
 
     // 画像をクリックして選択状態を切り替える関数
     function toggleSelection(container) {
         container.classList.toggle('selected'); // 選択状態の切り替え
+    }
+
+    // 選択された画像の数を更新する関数
+    function updateSelectedCount() {
+        var selectedCount = document.querySelectorAll('.show_image_container.selected').length;
+        document.getElementById('selectedCount').textContent = '選択された画像: ' + selectedCount;
     }
 
     // 大きな画像領域をクリックしたら非表示にする（オーバーレイを閉じる）
@@ -95,13 +106,11 @@
         gap: 10px; /* 画像間の隙間 */
     }
 
-    .button_array{
+    .button_array {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
     }
-
-
 
     .show_image_container {
         width: 200px; /* 画像コンテナの幅を統一 */
@@ -118,7 +127,7 @@
     }
 
     .show_image_container.selected img {
-        border-color: blue !important; /* 選択された画像の枠線を青色にする */
+        border-color: blue; /* 選択された画像の枠線を青色にする */
     }
 
     #largeImageContainer {
@@ -137,9 +146,9 @@
         cursor: pointer; /* カーソルをポインターに変更 */
     }
 
-    span{
+    body h2 span {
         display: block;
-        margin: 0 auto;
+        text-align: center;
     }
 </style>
 </body>
