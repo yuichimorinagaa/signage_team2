@@ -15,15 +15,15 @@ class PreviewController extends Controller
     public function update(Request $request){
         $selectedFiles = $request->input('files', []);
         if(!empty($selectedFiles)){
-            File::whereIn('id', $selectedFiles)->update(['status' => 1]);
+            File::whereIn('id', $selectedFiles)->update(['status' => File::STATUS_SELECTED]);
         }
-        File::whereNotIn('id', $selectedFiles)->update(['status' => 0]);
+        File::whereNotIn('id', $selectedFiles)->update(['status' => File::STATUS_NOT_SELECTED]);
         return redirect()->route('preview.index')->with('success', '更新しました');
     }
 
 
     public function back(){
-        File::where('status', '!=', 0)->update(['status'=>0]);
+        File::where('status', '!=', File::STATUS_NOT_SELECTED)->update(['status'=>File::STATUS_NOT_SELECTED]);
         return redirect()->route('file.index');
     }
 }
