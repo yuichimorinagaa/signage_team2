@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -15,6 +16,12 @@ class AdminController extends Controller
 
     public function delete(Request $request){
         $user=User::find($request['id']);
+        if($user->id==$request['id']){
+            $user->delete();
+            Auth::logout();
+            return redirect()->route('login.index');
+
+        }
         $user->delete();
 
         return redirect()->route('admin.index');
