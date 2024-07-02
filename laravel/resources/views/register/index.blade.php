@@ -23,7 +23,7 @@
     @csrf
     <label for="email">メールアドレス</label>
     <input type="text" name="email" id="email">
-    <label for="password">パスワード</label>
+    <label for="password">パスワード(8文字以上で入力してください)</label>
     <input type="password" id="password" name="password">
     <label for="invitation_code">招待コード</label>
     <input type="text" id="invitation_code" name="invitation_code">

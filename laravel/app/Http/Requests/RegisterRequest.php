@@ -22,16 +22,19 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required',
-            'password' => 'required',
-            'invitation_code'=>'required|in:sdb-intern',
+            'email' => ['required','email','unique:users'],
+            'password' => ['required','min:8'],
+            'invitation_code'=>['required','in:sdb-intern'],
         ];
     }
 
     public function messages()
     {
         return [
-            'email.required' => 'メールアドレスは必須です',
+            'password.min'=>'パスワードは8文字以上で入力してください。',
+            'email.unique'=>'このメールアドレスは既に登録されています。',
+            'email.required' => 'メールアドレスは必須です。',
+            'email.email'=>'有効なメールアドレスを入力してください。',
             'password.required' => 'パスワードを入力してください。',
             'invitation_code.required'=>'招待コードを入力してください。',
             'invitation_code.in'=>'招待コードが正しくありません。'

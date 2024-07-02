@@ -13,6 +13,10 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return Auth::check() ? null : route('user.login');
+
+        
+
+        return Auth::check() ? null : route('login.index');
+
     }
 }
