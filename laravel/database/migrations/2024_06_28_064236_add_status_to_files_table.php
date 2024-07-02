@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
-            $table->string('file_path');
-            $table->timestamps();
+        Schema::table('files', function (Blueprint $table) {
+            $table->integer('status')->default(0)->comment('0:not selected, 1:selected');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::table('files', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 };
