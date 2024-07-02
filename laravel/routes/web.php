@@ -37,6 +37,11 @@ Route::middleware('auth')->group(function(){
 });
 
 
-Route::post('users/file', [FileController::class,'store'])->name('file.store');
+Route::middleware('auth')->group(function () {
 Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.delete');
+Route::post('users/file', [FileController::class,'store'])->name('file.store');
+});
 
+
+Route::post('users/file/select', [FileController::class, 'selectFiles'])->name('file.select');
+Route::post('users/file/change', [FileController::class, 'statusChange'])->name('file.statusChange');
