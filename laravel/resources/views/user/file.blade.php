@@ -32,6 +32,8 @@
     <input type="submit" class="btn btn-primary " value="投稿">
 </form>
 
+
+
 @if (session('error'))
     <div class="alert alert-danger">
         {{ session('error') }}
@@ -47,9 +49,21 @@
 <div class="image-grid">
 @foreach($files as $file)
     <div class="show_image_container">
+
         <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
         <div class="button_array">
-            <button class="btn btn-info select-image">選択</button>
+
+
+
+            <form action="{{ route('file.select') }}" method="POST">
+                @csrf
+                <!-- ボタンを通常のボタンとして扱う -->
+                <button type="button" class="btn btn-info select-image">
+                    {{ $file->status == 0 ? '選択' : '選択解除' }}
+                </button>
+                <!-- 選択されたファイルのIDを隠しフィールドで送信 -->
+                <input type="hidden" name="selected_files[]" value="{{ $file->id }}">
+            </form>
             <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')

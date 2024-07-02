@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FileRequest;
 use App\Models\File;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,24 +41,51 @@ class FileController extends Controller
         return view('user.file', compact('files'));
     }
 
-
-    public function delete($id)
+    public function selectFiles(Request $request)
     {
+        $selectedFiles = $request->input('selected_files', []);
+        $request->session()->put('selected_files', $selectedFiles);
 
+        return redirect()->route('file.select')->with('success', 'ファイルが選択されました。');
+    }
 
-        $file = File::find($id);
+    public function statusChange(Request $request)
+    {
+        $selectedFiles = $request->session()->get('selected_files', []);
 
-        $userId = Auth::id();
-        // ログインユーザーが画像の所有者かどうかを確認します
-        if ($file->user_id !== $userId) {
-            return redirect()->back()->with('error', 'この画像は削除できません。');
-
+        if (!empty($selectedFiles)) {
+            File::whereIn('id', $selectedFiles)->update(['status' => 1]);
         }
 
-        Storage::delete('storage/image/'. $file->file_path);
+        // 選択されたファイルの情報を取得し直す
+        $files = File::whereIn('id', $selectedFiles)->get();
 
-        $file->delete();
-
-        return redirect()->route('file.index')->with('success', '画像を削除しました。');
+        return view('user.file', compact('files'));
     }
-}
+
+
+
+
+
+
+
+    public function delete($id)
+        {
+
+
+            $file = File::find($id);
+
+            $userId = Auth::id();
+            // ログインユーザーが画像の所有者かどうかを確認します
+            if ($file->user_id !== $userId) {
+                return redirect()->back()->with('error', 'この画像は削除できません。');
+
+            }
+
+            Storage::delete('storage/image/'. $file->file_path);
+
+            $file->delete();
+
+            return redirect()->route('file.index')->with('success', '画像を削除しました。');
+
+    }}
