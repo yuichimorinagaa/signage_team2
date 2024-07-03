@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\File;
+
+use App\Models\File;
 use Illuminate\Http\Request;
 
 class PreviewController extends Controller
