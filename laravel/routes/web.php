@@ -4,7 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\PreviewController;
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 

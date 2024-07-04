@@ -32,6 +32,12 @@
     <input type="submit" class="btn btn-primary " value="投稿">
 </form>
 
+<form action="{{ route('file.statusChange') }}" method="post" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="selected_files" id="selectedFilesInput">
+    <input type="submit" class="btn btn-primary" value="プレビューを見る">
+</form>
+
 
 
 @if (session('error'))
@@ -48,7 +54,7 @@
 
 <div class="image-grid">
 @foreach($files as $file)
-    <div class="show_image_container">
+    <div class="show_image_container" data-file-id="{{ $file->id }}">
 
         <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
         <div class="button_array">
@@ -103,6 +109,7 @@
         selectButton.addEventListener('click', function() {
             toggleSelection(this.closest('.show_image_container')); // 親要素（.show_image_container）を選択状態にする
             updateSelectedCount(); // 選択された画像の数を更新する
+            updateSelectedFilesInput(); // 選択された画像のIDを更新する
         });
     });
 
@@ -115,6 +122,14 @@
     function updateSelectedCount() {
         var selectedCount = document.querySelectorAll('.show_image_container.selected').length;
         document.getElementById('selectedCount').textContent = '選択された画像: ' + selectedCount;
+    }
+
+    function updateSelectedFilesInput() {
+        var selectedFiles = [];
+        document.querySelectorAll('.show_image_container.selected').forEach(function(container) {
+            selectedFiles.push(container.dataset.fileId); // data-file-id属性からファイルIDを取得
+        });
+        document.getElementById('selectedFilesInput').value = selectedFiles.join(','); // カンマ区切りの文字列に変換してhidden inputに設定
     }
 
     // 大きな画像領域をクリックしたら非表示にする（オーバーレイを閉じる）
