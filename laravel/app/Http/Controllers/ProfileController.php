@@ -39,7 +39,6 @@ class ProfileController extends Controller
             'artists' => 'required|string|max:255',
             'if_ceo' => 'required|string|max:255',
         ]);
-
         if ($request->hasFile('profile_photo_path')) {
             $filePath = $request->file('profile_photo_path')->store('profile_photos', 'public');
             $validatedData['profile_photo_path'] = $filePath;
@@ -48,6 +47,9 @@ class ProfileController extends Controller
         Profile::create($validatedData);
 
         return redirect()->route('profiles.thanks')->with('success', 'Profile created successfully.');
+
+
+
     }
 
     public function thanks()
