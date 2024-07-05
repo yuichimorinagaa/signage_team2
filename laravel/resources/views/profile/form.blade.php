@@ -18,7 +18,7 @@
     <form action="{{ route('profiles.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="name">氏名:</label>
+            <label for="name">氏名:<span style="color: red;">※</span></label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
         <div class="form-group">
@@ -42,11 +42,11 @@
             <input type="file" class="form-control-file" id="profile_photo_path" name="profile_photo_path">
         </div>
         <div class="form-group">
-            <label for="joining_date">入社日:</label>
+            <label for="joining_date">入社日:<span style="color: red;">※</span></label>
             <input type="date" class="form-control" id="joining_date" name="joining_date" required>
         </div>
         <div class="form-group">
-            <label for="hobbies">趣味:</label>
+            <label for="hobbies">趣味:<span style="color: red;">※</span></label>
             <input type="text" class="form-control" id="hobbies" name="hobbies" required>
         </div>
         <div class="form-group">
@@ -72,43 +72,43 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="high_school">出身高校:</label>
+            <label for="high_school">出身高校:<span style="color: red;">※</span></label>
             <input type="text" class="form-control" id="high_school" name="high_school" required>
         </div>
         <div class="form-group">
-            <label for="hometown">〇〇生まれ〇〇育ち:</label>
+            <label for="hometown">〇〇生まれ〇〇育ち:<span style="color: red;">※</span></label>
             <input type="text" class="form-control" id="hometown" name="hometown" required>
         </div>
         <div class="form-group">
-            <label for="birthday">誕生日:</label>
+            <label for="birthday">誕生日:<span style="color: red;">※</span></label>
             <input type="date" class="form-control" id="birthday" name="birthday" required>
         </div>
         <div class="form-group">
-            <label for="motto">座右の銘:</label>
+            <label for="motto">座右の銘:<span style="color: red;">※</span></label>
             <input type="text" class="form-control" id="motto" name="motto" required>
         </div>
         <div class="form-group">
-            <label for="restaurants">ひようらで一番好きな店:</label>
+            <label for="restaurants">ひようらで一番好きな店:<span style="color: red;">※</span></label>
             <input type="text" class="form-control" id="restaurants" name="restaurants" required>
         </div>
         <div class="form-group">
-            <label for="club_activities">入ってる（入ってた）部活・サークル:</label>
+            <label for="club_activities">入ってる（入ってた）部活・サークル:<span style="color: red;">※</span></label>
             <input type="text" class="form-control" id="club_activities" name="club_activities" required>
         </div>
         <div class="form-group">
-            <label for="famous_person">好きな芸能人:</label>
+            <label for="famous_person">好きな芸能人:<span style="color: red;">※</span></label>
             <input type="text" class="form-control" id="famous_person" name="famous_person" required>
         </div>
         <div class="form-group">
-            <label for="artists">よく聴くアーティスト:</label>
+            <label for="artists">よく聴くアーティスト:<span style="color: red;">※</span></label>
             <input type="text" class="form-control" id="artists" name="artists" required>
         </div>
         <div class="form-group">
-            <label for="if_ceo">もし私がSDBの社長だったら...:</label>
+            <label for="if_ceo">もし私がSDBの社長だったら...:<span style="color: red;">※</span></label>
             <textarea class="form-control" id="if_ceo" name="if_ceo" rows="4" required></textarea>
         </div>
         <div class="form-group">
-            <label for="comment">コメント:</label>
+            <label for="comment">みんなにメッセージ！:<span style="color: red;">※</span></label>
             <textarea class="form-control" id="comment" name="comment" rows="4" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">送信</button>
