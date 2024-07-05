@@ -29,50 +29,47 @@
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            let profiles = @json($profiles  ?? []);
+            let profiles = @json($profiles);
 
-            if(profiles.length > 0) {
-                profiles = profiles.map(profile => {
-                    return {
-                        ...profile,
-                        profile_photo_path: "{{ asset('storage/profile_photo') }}/" + profile.profile_photo_path
-                    };
-                });
+            profiles = profiles.map(profile => {
+                return {
+                    ...profile,
+                    profile_photo_path: "{{ asset('storage/profile_photo') }}/" + profile.profile_photo_path
+                };
+            });
 
 
-                let currentIndex = 0;
+            let currentIndex = 0;
 
-                function showProfile(index) {
-                    let profile = profiles[index];
-                    document.getElementById('profile-photo').src = profile.profile_photo_path;
-                    document.getElementById('profile-name').textContent = profile.name;
-                    document.getElementById('profile-grade').textContent = profile.grade;
-                    document.getElementById('profile-university').textContent = profile.university;
-                    document.getElementById('profile-joining-date').textContent = profile.joining_date;
-                    document.getElementById('profile-comment').textContent = profile.comment;
-                    document.getElementById('profile-hobbies').textContent = profile.hobbies;
-                    document.getElementById('profile-mbti').textContent = profile.mbti;
-                    document.getElementById('profile-high-school').textContent = profile.high_school;
-                    document.getElementById('profile-hometown').textContent = profile.hometown;
-                    document.getElementById('profile-birthday').textContent = profile.birthday;
-                    document.getElementById('profile-motto').textContent = profile.motto;
-                    document.getElementById('profile-restaurants').textContent = profile.restaurants;
-                    document.getElementById('profile-club-activities').textContent = profile.club_activities;
-                    document.getElementById('profile-famous-person').textContent = profile.famous_person;
-                    document.getElementById('profile-artists').textContent = profile.artists;
-                    document.getElementById('profile-if-ceo').textContent = profile.if_ceo;
-                }
-
-                function rotateProfiles() {
-                    showProfile(currentIndex);
-                    currentIndex = (currentIndex + 1) % profiles.length;
-                }
-
-                setInterval(rotateProfiles, 30000); // 30秒ごとにプロフィールを変更
-                rotateProfiles(); // 初期表示
-            } else {
-                console.error('Profiles data is empty');
+            function showProfile(index) {
+                let profile = profiles[index];
+                document.getElementById('profile-photo').src = profile.profile_photo_path;
+                document.getElementById('profile-name').textContent = profile.name;
+                document.getElementById('profile-grade').textContent = profile.grade;
+                document.getElementById('profile-university').textContent = profile.university;
+                document.getElementById('profile-joining-date').textContent = profile.joining_date;
+                document.getElementById('profile-comment').textContent = profile.comment;
+                document.getElementById('profile-hobbies').textContent = profile.hobbies;
+                document.getElementById('profile-mbti').textContent = profile.mbti;
+                document.getElementById('profile-high-school').textContent = profile.high_school;
+                document.getElementById('profile-hometown').textContent = profile.hometown;
+                document.getElementById('profile-birthday').textContent = profile.birthday;
+                document.getElementById('profile-motto').textContent = profile.motto;
+                document.getElementById('profile-restaurants').textContent = profile.restaurants;
+                document.getElementById('profile-club-activities').textContent = profile.club_activities;
+                document.getElementById('profile-famous-person').textContent = profile.famous_person;
+                document.getElementById('profile-artists').textContent = profile.artists;
+                document.getElementById('profile-if-ceo').textContent = profile.if_ceo;
             }
+
+            function rotateProfiles() {
+                showProfile(currentIndex);
+                currentIndex = (currentIndex + 1) % profiles.length;
+            }
+
+            setInterval(rotateProfiles, 30000); // 30秒ごとにプロフィールを変更
+            rotateProfiles(); // 初期表示
+
         });
     </script>
 </head>
