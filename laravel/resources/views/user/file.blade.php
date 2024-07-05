@@ -8,6 +8,8 @@
     <title>Document</title>
     <!-- BootstrapのCSS読み込み -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- FontAwesomeの読み込み -->
+    <link href="https://use.fontawesome.com/releases/v6.5.2/css/all.css" rel="stylesheet">
 </head>
 <body>
 <h2>画像選択画面</h2>
@@ -53,31 +55,31 @@
 @endif
 
 <div class="image-grid">
-@foreach($files as $file)
-    <div class="show_image_container" data-file-id="{{ $file->id }}">
+    @foreach($files as $file)
+        <div class="show_image_container" data-file-id="{{ $file->id }}">
 
-        <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
-        <div class="button_array">
+            <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
+            <div class="button_array">
 
 
 
-            <form action="{{ route('file.select') }}" method="POST">
-                @csrf
-                <!-- ボタンを通常のボタンとして扱う -->
-                <button type="button" class="btn btn-info select-image">
-                    {{ $file->status == 0 ? '選択' : '選択解除' }}
-                </button>
-                <!-- 選択されたファイルのIDを隠しフィールドで送信 -->
-                <input type="hidden" name="selected_files[]" value="{{ $file->id }}">
-            </form>
-            <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger ">削除</button>
-            </form>
+                <form action="{{ route('file.select') }}" method="POST">
+                    @csrf
+                    <!-- ボタンを通常のボタンとして扱う -->
+                    <button type="button" class="btn btn-info select-image">
+                        {{ $file->status == 0 ? '選択' : '選択解除' }}
+                    </button>
+                    <!-- 選択されたファイルのIDを隠しフィールドで送信 -->
+                    <input type="hidden" name="selected_files[]" value="{{ $file->id }}">
+                </form>
+                <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button title="削除" type="submit" class="delete_button"><i class="fa-solid fa-circle-minus"></i></button>
+                </form>
+            </div>
         </div>
-    </div>
-@endforeach
+    @endforeach
 </div>
 
 
@@ -156,18 +158,20 @@
         width: 200px; /* 画像コンテナの幅を統一 */
         height: auto; /* 高さは自動調整 */
         margin-bottom: 10px; /* コンテナ間の余白を追加 */
+        position:relative;
     }
 
     .show_image_container img {
         width: 100%; /* 画像をコンテナ幅に合わせる */
         height: auto; /* 高さは自動調整 */
         cursor: pointer; /* カーソルをポインターに変更 */
-        border: 2px solid transparent; /* 初期は透明な枠線 */
+        border: 3px solid transparent; /* 初期は透明な枠線 */
         transition: border-color 0.2s ease; /* 枠線の色が変わるアニメーション */
     }
 
     .show_image_container.selected img {
         border-color: blue; /* 選択された画像の枠線を青色にする */
+        filter: brightness(80%); /* 画像を少し暗くする */
     }
 
     #largeImageContainer {
@@ -189,6 +193,20 @@
     body h2 span {
         display: block;
         text-align: center;
+    }
+    .delete_button{
+        border:none; /*ボタンの枠線を消去*/
+        background:none; /*ボタンの背景を消去*/
+        position: absolute; /* 絶対位置 */
+        top: -26px; /* 上外に配置 */
+        right: -20px; /* 右外に配置 */
+        padding: 5px; /* 余白 */
+        cursor:pointer; /* カーソルをポインターに */
+        font-size:20px;
+        color:red;
+    }
+    .select-image{
+        color:white;
     }
 </style>
 </body>
