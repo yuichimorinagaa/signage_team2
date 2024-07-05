@@ -15,22 +15,37 @@
             border-radius: 10px;
         }
         .profile img {
-            max-width: 100%;
+            max-width: 50%;
             height: auto;
             border-radius: 50%;
         }
+        .image {
+            text-align: center;
+        }
+        .name {
+            text-align: center;
+        }
+
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let profiles = @json($profiles);
+            profiles = profiles.map(profile => {
+                return {
+                    ...profile,
+                    profile_photo_path: "{{ asset('storage/profile_photo') }}/" + profile.profile_photo_path
+                };
+            });
+
+
             let currentIndex = 0;
 
             function showProfile(index) {
                 let profile = profiles[index];
+                document.getElementById('profile-photo').src = profile.profile_photo_path;
                 document.getElementById('profile-name').textContent = profile.name;
                 document.getElementById('profile-grade').textContent = profile.grade;
                 document.getElementById('profile-university').textContent = profile.university;
-                document.getElementById('profile-photo').src = profile.profile_photo_path;
                 document.getElementById('profile-joining-date').textContent = profile.joining_date;
                 document.getElementById('profile-comment').textContent = profile.comment;
                 document.getElementById('profile-hobbies').textContent = profile.hobbies;
@@ -58,8 +73,12 @@
 </head>
 <body>
 <div class="profile">
-    <h1 id="profile-name"></h1>
-    <img id="profile-photo" src="" alt="Profile Photo">
+    <div class="image">
+        <img id="profile-photo" src="" alt="Profile Photo">
+    </div>
+    <div class="name">
+        <h1 id="profile-name"></h1>
+    </div>
     <p><strong>学年:</strong> <span id="profile-grade"></span></p>
     <p><strong>大学:</strong> <span id="profile-university"></span></p>
     <p><strong>入社日:</strong> <span id="profile-joining-date"></span></p>
@@ -76,6 +95,7 @@
     <p><strong>もし私がSDBの社長だったら...:</strong> <span id="profile-if-ceo"></span></p>
     <p><strong>コメント:</strong> <span id="profile-comment"></span></p>
 </div>
+
 
 </body>
 </html>
