@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PreviewController;
+
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TestController;
-use App\Http\Controllers\PreviewController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +27,8 @@ Route::get('/', function () {
 
 Route::get('tests',[TestController::class,'index'])->name('tests.index');
 Route::post('tests/upload',[TestController::class, 'upload'])->name('tests.upload');
+
+//Route::get('tests/profile',[ProfileController::class,'index'])->name('tests.profile');
 
 Route::get('login',[LoginController::class,'loginShow'])->name('login.index');
 Route::get('register',[RegisterController::class,'registerShow'])->name('register.index');
@@ -50,3 +54,7 @@ Route::post('users/file/change', [FileController::class, 'statusChange'])->name(
 Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index');
 Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
 Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');
+
+Route::get('users/testApi', [UserController::class, 'index'])-> name('testApi');
+//Route::get('/', [UserController::class, 'index']);
+
