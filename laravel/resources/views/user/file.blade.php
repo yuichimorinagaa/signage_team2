@@ -10,9 +10,21 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- FontAwesomeの読み込み -->
     <link href="https://use.fontawesome.com/releases/v6.5.2/css/all.css" rel="stylesheet">
+    <!-- jqueryの読み込み　-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
+<header>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-sign-out-alt"></i> ログアウト
+        </button>
+    </form>
+    <p>Upload</p>
+</header>
 <body>
-<h2>Upload</h2>
+
 
 
 @if ($errors->any())
@@ -25,21 +37,33 @@
     </div>
 @endif
 
-<div id="selectedCount">選択された画像: 0</div>
 
 
-<form action="{{route('file.store')}}" method="post" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="file" >
-    <input type="submit" class="btn btn-primary " value="投稿">
-</form>
 
-<form action="{{ route('file.statusChange') }}" method="post" enctype="multipart/form-data">
-    @csrf
-    <input type="hidden" name="selected_files" id="selectedFilesInput">
-    <input type="submit" class="btn btn-primary" value="プレビューを見る">
-</form>
-
+<div class="container">
+    <div class="selectedCount" id="selectedCount">選択された画像: 0</div>
+    <div class="form-group" >
+        <form action="{{route('file.store')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <label class="upload_file btn btn-primary">
+                <input  type="file" name="file" >
+                <i class="fa-regular fa-file-image"></i>ファイルを選択
+            </label>
+            <p>選択されていません</p>
+            <button type="submit" class="btn btn-primary upload">
+                <i class="fa-solid fa-upload"></i>アップロード
+            </button>
+        </form>
+        <form action="{{ route('file.statusChange') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="selected_files" id="selectedFilesInput">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa-regular fa-circle-play"></i>プレビュー
+            </button>
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>
 
 
 @if (session('error'))
@@ -138,6 +162,11 @@
     document.getElementById('largeImageContainer').addEventListener('click', function() {
         this.style.display = 'none'; // 大きな画像を非表示にする
     });
+    //jQueryで選択したファイルパスを表示//
+    $('input').on('change', function () {
+        var file = $(this).prop('files')[0];
+        $('p').text(file.name);
+    });
 </script>
 
 
@@ -146,6 +175,7 @@
         display: flex;
         flex-wrap: wrap;
         gap: 10px; /* 画像間の隙間 */
+        margin-top:50px;
     }
 
     .button_array {
@@ -208,6 +238,69 @@
     .select-image{
         color:white;
     }
+    .form-group{
+        display:flex;
+        align-items:center;
+        gap:10px;
+    }
+
+    .fa-upload{
+        margin-right:5px;
+    }
+    .upload{
+        margin:0 5px;
+    }
+    .selectedCount{
+        float: left;
+        margin-right:auto;
+        font-size:20px;
+    }
+
+    .container{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        margin-top:10px;
+    }
+
+    .fa-circle-play{
+        margin:5px;
+    }
+    input[type="file"]{
+        display:none;
+    }
+    .upload_file{
+        cursor:pointer;
+
+    }
+    .form-group form {
+        display: flex; /* 内部のフォームもFlexコンテナとして設定 */
+        align-items: center; /* 垂直方向に中央揃え */
+        gap: 10px; /* 要素間の隙間 */
+    }
+    .btn-primary{
+        background-color:dodgerblue;
+
+    }
+    .btn-danger{
+        float:right;
+        background-color: rgba(255, 255, 255, 0.3);
+        transition:all 0.5s;
+        border-color:rgba(255, 255, 255, 0.3);
+    }
+    header {
+        height: 37px;
+        width: 100%;
+        background-color: rgba(34, 49, 52, 0.9);
+    }
+    header p{
+        color:white;
+        font-size:25px;
+    }
+    .fa-regular{
+        margin-right:5px;
+    }
+
 </style>
 </body>
 </html>

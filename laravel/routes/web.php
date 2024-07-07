@@ -50,3 +50,4 @@ Route::post('users/file/change', [FileController::class, 'statusChange'])->name(
 Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index');
 Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
 Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');
+Route::post('logout',[LoginController::class,'logout'])->name('logout');
