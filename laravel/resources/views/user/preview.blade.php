@@ -86,13 +86,35 @@
         .form-container button:hover {
             background-color: gray;
         }
+        .btn-danger{
+            float:right;
+            background-color: rgba(255, 255, 255, 0.3);
+            transition:all 0.5s;
+            border-color:rgba(255, 255, 255, 0.3);
+        }
+        header {
+            height: 37px;
+            width: 100%;
+            background-color: rgba(34, 49, 52, 0.9);
+        }
+        header p{
+            color:white;
+            font-size:25px;
+        }
+
     </style>
 
 </head>
 <body>
 
 <header>
-    <h1>プレビュー画面</h1>
+   <p>Preview</p>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-sign-out-alt"></i> ログアウト
+        </button>
+    </form>
 </header>
 
 @if(session('success'))

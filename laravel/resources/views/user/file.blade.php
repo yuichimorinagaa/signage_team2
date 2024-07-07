@@ -13,6 +13,7 @@
     <!-- jqueryの読み込み　-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+
 </head>
 <header>
     <form action="{{ route('logout') }}" method="POST">
@@ -21,7 +22,7 @@
             <i class="fa-solid fa-sign-out-alt"></i> ログアウト
         </button>
     </form>
-    <p>Upload</p>
+    <p>File Upload</p>
 </header>
 <body>
 
@@ -287,15 +288,18 @@
         background-color: rgba(255, 255, 255, 0.3);
         transition:all 0.5s;
         border-color:rgba(255, 255, 255, 0.3);
+        height:45px;
     }
     header {
-        height: 37px;
+        height: 45px;
         width: 100%;
         background-color: rgba(34, 49, 52, 0.9);
     }
     header p{
         color:white;
-        font-size:25px;
+        font-size:30px;
+        font-family: "Noto Serif", sans-serif;
+        font-weight:bold;
     }
     .fa-regular{
         margin-right:5px;
