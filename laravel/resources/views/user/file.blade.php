@@ -12,7 +12,7 @@
     <link href="https://use.fontawesome.com/releases/v6.5.2/css/all.css" rel="stylesheet">
 </head>
 <body>
-<h2>画像選択画面</h2>
+<h2>Upload</h2>
 
 
 @if ($errors->any())
