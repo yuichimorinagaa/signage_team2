@@ -38,3 +38,56 @@
 
 </body>
 </html>
+
+
+#image-list {
+width: 20%;
+padding: 10px;
+box-sizing: border-box;
+overflow-y: auto;
+border-right: 1px solid #ccc;
+}
+#image-list img {
+width: 100%;
+height: auto;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+}
+
+#slideshow img {
+max-width: 100%;
+max-height: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+}
+.message{
+text-align:center;
+vertical-align: center;
+}
+.navigation {
+margin-top: 100px;
+display: flex;
+justify-content: center;
+}
+.navigation button {
+background-color: floralwhite;
+border: none;
+padding: 10px 20px;
+cursor: pointer;
+}
+.navigation button:hover {
+background-color: gray;
+}
+.form-container {
+text-align: center;
+padding: 10px;
+}
+.form-container button {
+background-color: navajowhite;
+border: none;
+padding: 10px 20px;
+cursor: pointer;
+}
+.form-container button:hover {
+background-color: gray;
+}
