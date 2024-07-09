@@ -172,6 +172,10 @@
 
 
 <style>
+    body{
+        background-color:#F0F5F9;
+    }
+
     .image-grid {
         display: flex;
         flex-wrap: wrap;
@@ -287,7 +291,7 @@
         float:right;
         background-color: rgba(255, 255, 255, 0.3);
         transition:all 0.5s;
-        border-color:rgba(255, 255, 255, 0.3);
+        border:none;
         height:45px;
     }
     header {

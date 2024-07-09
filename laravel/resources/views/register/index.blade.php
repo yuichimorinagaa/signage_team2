@@ -10,7 +10,7 @@
     <title>Document</title>
     <style>
         body{
-
+            background-color:#F0F5F9;
         }
         .signup{
             font-size:50px;

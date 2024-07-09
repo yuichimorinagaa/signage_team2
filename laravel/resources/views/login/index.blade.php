@@ -39,6 +39,9 @@
             padding-top:100px;
 
         }
+        body{
+            background-color:#F0F5F9;
+        }
     </style>
 </head>
 <body>

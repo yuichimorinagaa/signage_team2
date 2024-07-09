@@ -39,6 +39,27 @@
 </body>
 </html>
 
+.btn-danger{
+float:right;
+background-color: rgba(255, 255, 255, 0.3);
+transition:all 0.5s;
+border-color:rgba(255, 255, 255, 0.3);
+height:45px;
+cursor:pointer;
+}
+header {
+height: 45px;
+width: 100%;
+background-color: rgba(34, 49, 52, 0.9);
+
+}
+header p{
+color:white;
+font-size:30px;
+font-family: "Noto Serif", sans-serif;
+font-weight:bold;
+float:left
+}
 
 #image-list {
 width: 20%;
