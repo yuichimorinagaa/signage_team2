@@ -51,6 +51,6 @@ Route::post('profiles/form/store', [ProfileController::class, 'store'])->name('p
 Route::get('profiles/form/thanks', [ProfileController::class, 'thanks'])->name('profiles.thanks');
 
 Route::get('users/testApi', [UserController::class, 'index'])-> name('testApi');
-//Route::get('/', [UserController::class, 'index']);
+
 
 
