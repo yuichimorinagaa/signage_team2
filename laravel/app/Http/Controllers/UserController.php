@@ -44,6 +44,7 @@ class UserController extends Controller
             // エラーハンドリング
             return view('weather.error', ['error' => $e->getMessage()]);
         }
+
     }
 }
 
