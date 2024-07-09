@@ -7,11 +7,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <!-- BootstrapのCSS読み込み -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- FontAwesomeの読み込み -->
+    <link href="https://use.fontawesome.com/releases/v6.5.2/css/all.css" rel="stylesheet">
+    <!-- jqueryの読み込み　-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
 </head>
+<header>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-sign-out-alt"></i> ログアウト
+        </button>
+    </form>
+    <p>File Upload</p>
+</header>
 <body>
-<h2>画像選択画面</h2>
+
 
 
 @if ($errors->any())
@@ -24,21 +39,33 @@
     </div>
 @endif
 
-<div id="selectedCount">選択された画像: 0</div>
 
 
-<form action="{{route('file.store')}}" method="post" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="file" >
-    <input type="submit" class="btn btn-primary " value="投稿">
-</form>
 
-<form action="{{ route('file.statusChange') }}" method="post" enctype="multipart/form-data">
-    @csrf
-    <input type="hidden" name="selected_files" id="selectedFilesInput">
-    <input type="submit" class="btn btn-primary" value="プレビューを見る">
-</form>
-
+<div class="container">
+    <div class="selectedCount" id="selectedCount">選択された画像: 0</div>
+    <div class="form-group" >
+        <form action="{{route('file.store')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <label class="upload_file btn btn-primary">
+                <input  type="file" name="file" >
+                <i class="fa-regular fa-file-image"></i>ファイルを選択
+            </label>
+            <p>選択されていません</p>
+            <button type="submit" class="btn btn-primary upload">
+                <i class="fa-solid fa-upload"></i>アップロード
+            </button>
+        </form>
+        <form action="{{ route('file.statusChange') }}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="selected_files" id="selectedFilesInput">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa-regular fa-circle-play"></i>プレビュー
+            </button>
+        </form>
+    </div>
+    <div class="clear"></div>
+</div>
 
 
 @if (session('error'))
@@ -54,6 +81,8 @@
 @endif
 
 <div class="image-grid">
+
+
 @foreach($files as $file)
     <div class="show_image_container" data-file-id="{{ $file->id }}">
 
@@ -74,11 +103,12 @@
             <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger ">削除</button>
+                
+                <button title="削除" type="submit" class="delete_button"><i class="fa-solid fa-circle-minus"></i></button>
             </form>
+
         </div>
-    </div>
-@endforeach
+    @endforeach
 </div>
 
 
@@ -148,14 +178,24 @@
     document.getElementById('largeImageContainer').addEventListener('click', function() {
         this.style.display = 'none'; // 大きな画像を非表示にする
     });
+    //jQueryで選択したファイルパスを表示//
+    $('input').on('change', function () {
+        var file = $(this).prop('files')[0];
+        $('p').text(file.name);
+    });
 </script>
 
 
 <style>
+    body{
+        background-color:#F0F5F9;
+    }
+
     .image-grid {
         display: flex;
         flex-wrap: wrap;
         gap: 10px; /* 画像間の隙間 */
+        margin-top:50px;
     }
 
     .button_array {
@@ -168,18 +208,20 @@
         width: 200px; /* 画像コンテナの幅を統一 */
         height: auto; /* 高さは自動調整 */
         margin-bottom: 10px; /* コンテナ間の余白を追加 */
+        position:relative;
     }
 
     .show_image_container img {
         width: 100%; /* 画像をコンテナ幅に合わせる */
         height: auto; /* 高さは自動調整 */
         cursor: pointer; /* カーソルをポインターに変更 */
-        border: 2px solid transparent; /* 初期は透明な枠線 */
+        border: 3px solid transparent; /* 初期は透明な枠線 */
         transition: border-color 0.2s ease; /* 枠線の色が変わるアニメーション */
     }
 
     .show_image_container.selected img {
         border-color: blue; /* 選択された画像の枠線を青色にする */
+        filter: brightness(80%); /* 画像を少し暗くする */
     }
 
     #largeImageContainer {
@@ -202,6 +244,86 @@
         display: block;
         text-align: center;
     }
+    .delete_button{
+        border:none; /*ボタンの枠線を消去*/
+        background:none; /*ボタンの背景を消去*/
+        position: absolute; /* 絶対位置 */
+        top: -26px; /* 上外に配置 */
+        right: -20px; /* 右外に配置 */
+        padding: 5px; /* 余白 */
+        cursor:pointer; /* カーソルをポインターに */
+        font-size:20px;
+        color:red;
+    }
+    .select-image{
+        color:white;
+    }
+    .form-group{
+        display:flex;
+        align-items:center;
+        gap:10px;
+    }
+
+    .fa-upload{
+        margin-right:5px;
+    }
+    .upload{
+        margin:0 5px;
+    }
+    .selectedCount{
+        float: left;
+        margin-right:auto;
+        font-size:20px;
+    }
+
+    .container{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        margin-top:10px;
+    }
+
+    .fa-circle-play{
+        margin:5px;
+    }
+    input[type="file"]{
+        display:none;
+    }
+    .upload_file{
+        cursor:pointer;
+
+    }
+    .form-group form {
+        display: flex; /* 内部のフォームもFlexコンテナとして設定 */
+        align-items: center; /* 垂直方向に中央揃え */
+        gap: 10px; /* 要素間の隙間 */
+    }
+    .btn-primary{
+        background-color:dodgerblue;
+
+    }
+    .btn-danger{
+        float:right;
+        background-color: rgba(255, 255, 255, 0.3);
+        transition:all 0.5s;
+        border:none;
+        height:45px;
+    }
+    header {
+        height: 45px;
+        width: 100%;
+        background-color: rgba(34, 49, 52, 0.9);
+    }
+    header p{
+        color:white;
+        font-size:30px;
+        font-family: "Noto Serif", sans-serif;
+        font-weight:bold;
+    }
+    .fa-regular{
+        margin-right:5px;
+    }
+
 </style>
 </body>
 </html>

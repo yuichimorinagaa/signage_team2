@@ -8,6 +8,25 @@
     <title>Document</title>
 </head>
 <body>
-<h1>ログイン成功</h1>
+
+<div id="content">
+    <p>このコンテンツを全画面表示します。</p>
+    <button id="fullscreenButton">全画面表示</button>
+</div>
+
+<script>
+    document.getElementById('fullscreenButton').addEventListener('click', function() {
+        var elem = document.getElementById('content');
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { // Firefox
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { // IE/Edge
+            elem.msRequestFullscreen();
+        }
+    });
+</script>
 </body>
 </html>
