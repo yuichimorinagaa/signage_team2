@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PreviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SignageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FileController;
@@ -61,3 +62,4 @@ Route::get('profiles/form/thanks', [ProfileController::class, 'thanks'])->name('
 Route::get('users/testApi', [UserController::class, 'index'])-> name('testApi');
 //Route::get('/', [UserController::class, 'index']);
 
+Route::get('signage', [SignageController::class, 'index'])->name('signage.index');
