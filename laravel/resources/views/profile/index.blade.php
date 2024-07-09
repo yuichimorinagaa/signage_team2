@@ -67,7 +67,7 @@
                 currentIndex = (currentIndex + 1) % profiles.length;
             }
 
-            setInterval(rotateProfiles, 30000); // 30秒ごとにプロフィールを変更
+            setInterval(rotateProfiles, 3000); // 30秒ごとにプロフィールを変更
             rotateProfiles(); // 初期表示
 
         });

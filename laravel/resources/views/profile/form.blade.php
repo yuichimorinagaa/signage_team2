@@ -33,8 +33,8 @@
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
         <div class="form-group">
-            <label for="grade">学年:</label>
-            <select class="form-control" id="grade" name="grade">
+            <label for="grade">学年:<span style="color: red;">※</span></label>
+            <select class="form-control" id="grade" name="grade" required>
                 <option value="">選択してください</option>
                 <option value="大学1年">大学1年</option>
                 <option value="大学2年">大学2年</option>
@@ -45,8 +45,8 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="university">大学:</label>
-            <input type="text" class="form-control" id="university" name="university">
+            <label for="university">大学:<span style="color: red;">※</span></label>
+            <input type="text" class="form-control" id="university" name="university" required>
         </div>
         <div class="form-group">
             <label for="profile_photo_path">プロフィール写真:</label>
@@ -61,8 +61,8 @@
             <input type="text" class="form-control" id="hobbies" name="hobbies" required>
         </div>
         <div class="form-group">
-            <label for="mbti">MBTI:</label>
-            <select class="form-control" id="mbti" name="mbti">
+            <label for="mbti">MBTI:<span style="color: red;">※</span></label>
+            <select class="form-control" id="mbti" name="mbti" required>
                 <option value="">選択してください</option>
                 <option value="INTJ">INTJ</option>
                 <option value="INTP">INTP</option>

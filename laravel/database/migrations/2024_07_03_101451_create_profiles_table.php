@@ -16,11 +16,22 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('grade')->nullable();
-            $table->string('university')->nullable();
-            $table->string('profile_photo_path')->default('profile_photo/default.png');
+            $table->string('grade');
+            $table->string('university');
+            $table->string('profile_photo_path')->nullable()->default('default.png');
             $table->date('joining_date');
             $table->string('comment');
+            $table->string('hobbies');
+            $table->string('mbti');
+            $table->string('high_school');
+            $table->string('hometown');
+            $table->date('birthday');
+            $table->string('motto');
+            $table->string('restaurants');
+            $table->string('club_activities');
+            $table->string('famous_person');
+            $table->string('artists');
+            $table->string('if_ceo');
 
         });
     }
