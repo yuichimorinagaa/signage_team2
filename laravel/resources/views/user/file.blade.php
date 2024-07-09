@@ -302,8 +302,7 @@
     header p{
         color:white;
         font-size:30px;
-        font-family: "Noto Serif", sans-serif;
-        font-weight:bold;
+0        font-weight:bold;
         padding:20px 0 0 7px;
 
     }

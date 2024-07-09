@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return route('logout');
 });
 
 Route::get('tests',[TestController::class,'index'])->name('tests.index');
