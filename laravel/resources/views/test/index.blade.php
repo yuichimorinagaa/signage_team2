@@ -36,5 +36,19 @@
     <button type="submit">ファイルをアップロードする（テスト）</button>
 </form>
 
+<script>
+    document.getElementById('fullscreenButton').addEventListener('click', function() {
+        var elem = document.getElementById('content');
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { // Firefox
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { // IE/Edge
+            elem.msRequestFullscreen();
+        }
+    });
+</script>
 </body>
 </html>
