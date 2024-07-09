@@ -25,7 +25,7 @@
     <p>File Upload</p>
 </header>
 <body>
-
+<h2>画像選択画面</h2>
 
 
 @if ($errors->any())
@@ -38,6 +38,7 @@
     </div>
 @endif
 
+<div id="selectedCount">選択された画像: 0</div>
 
 
 
@@ -80,11 +81,11 @@
 @endif
 
 <div class="image-grid">
-    @foreach($files as $file)
-        <div class="show_image_container" data-file-id="{{ $file->id }}">
+@foreach($files as $file)
+    <div class="show_image_container" data-file-id="{{ $file->id }}">
 
-            <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
-            <div class="button_array">
+        <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
+        <div class="button_array">
 
 
 
@@ -132,18 +133,29 @@
 
 
     // 選択ボタンをクリックして選択する処理
-    document.querySelectorAll('.select-image').forEach(function(selectButton) {
-        selectButton.addEventListener('click', function() {
-            toggleSelection(this.closest('.show_image_container')); // 親要素（.show_image_container）を選択状態にする
-            updateSelectedCount(); // 選択された画像の数を更新する
-            updateSelectedFilesInput(); // 選択された画像のIDを更新する
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 全ての .select-image ボタンに対してクリックイベントを設定
+        document.querySelectorAll('.select-image').forEach(function(selectButton) {
+            selectButton.addEventListener('click', function() {
+                // 親要素の .show_image_container を取得
+                const container = this.closest('.show_image_container');
+
+                // 選択状態を切り替える
+                container.classList.toggle('selected');
+                updateSelectedCount(); // 選択された画像の数を更新する
+                updateSelectedFilesInput(); // 選択された画像のIDを更新する
+                // ボタンのラベルを切り替える
+                if (container.classList.contains('selected')) {
+                    this.textContent = '選択解除'; // 選択解除のラベルに変更
+                } else {
+                    this.textContent = '選択'; // 選択のラベルに変更
+                }
+            });
         });
     });
 
-    // 画像をクリックして選択状態を切り替える関数
-    function toggleSelection(container) {
-        container.classList.toggle('selected'); // 選択状態の切り替え
-    }
 
     // 選択された画像の数を更新する関数
     function updateSelectedCount() {
