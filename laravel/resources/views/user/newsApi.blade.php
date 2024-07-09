@@ -17,6 +17,9 @@
             <div class="card-text">
                 <img src="{{$data['thumbnail']}}">
             </div>
+            <div>
+                {{$data['description']}}
+            </div>
         </div>
     @endforeach
 </div>
