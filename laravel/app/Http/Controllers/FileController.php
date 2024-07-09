@@ -52,22 +52,22 @@ class FileController extends Controller
 
     public function statusChange(Request $request)
     {
-        $selectedFiles = $request->session()->get('selected_files', []);
+        $selectedFiles = $request->input('selected_files', '');
 
-        if (!empty($selectedFiles)) {
-            File::whereIn('id', $selectedFiles)->update(['status' => 1]);
+        // 選択されたファイルIDを配列に変換
+        $selectedFilesArray = explode(',', $selectedFiles);
+
+        if (!empty($selectedFilesArray)) {
+            // ステータスを1に更新
+            File::whereIn('id', $selectedFilesArray)->update(['status' => 1]);
         }
 
-        // 選択されたファイルの情報を取得し直す
-        $files = File::whereIn('id', $selectedFiles)->get();
+        // 更新後のファイル情報を取得
+        $files = File::whereIn('id', $selectedFilesArray)->get();
 
-        return view('user.file', compact('files'));
+        // ビューにファイル情報を渡す
+        return view('user.preview', compact('files'));
     }
-
-
-
-
-
 
 
     public function delete($id)
