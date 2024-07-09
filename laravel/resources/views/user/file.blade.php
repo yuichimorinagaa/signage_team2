@@ -33,6 +33,12 @@
     <input type="submit" class="btn btn-primary " value="投稿">
 </form>
 
+<form action="{{ route('file.statusChange') }}" method="post" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" name="selected_files" id="selectedFilesInput">
+    <input type="submit" class="btn btn-primary" value="プレビューを見る">
+</form>
+
 
 
 @if (session('error'))
@@ -49,7 +55,7 @@
 
 <div class="image-grid">
 @foreach($files as $file)
-    <div class="show_image_container">
+    <div class="show_image_container" data-file-id="{{ $file->id }}">
 
         <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
         <div class="button_array">
@@ -60,7 +66,7 @@
                 @csrf
                 <!-- ボタンを通常のボタンとして扱う -->
                 <button type="button" class="btn btn-info select-image">
-                    {{ $file->status == 0 ? '選択' : '選択解除' }}
+                    選択
                 </button>
                 <!-- 選択されたファイルのIDを隠しフィールドで送信 -->
                 <input type="hidden" name="selected_files[]" value="{{ $file->id }}">
@@ -100,22 +106,42 @@
 
 
     // 選択ボタンをクリックして選択する処理
-    document.querySelectorAll('.select-image').forEach(function(selectButton) {
-        selectButton.addEventListener('click', function() {
-            toggleSelection(this.closest('.show_image_container')); // 親要素（.show_image_container）を選択状態にする
-            updateSelectedCount(); // 選択された画像の数を更新する
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 全ての .select-image ボタンに対してクリックイベントを設定
+        document.querySelectorAll('.select-image').forEach(function(selectButton) {
+            selectButton.addEventListener('click', function() {
+                // 親要素の .show_image_container を取得
+                const container = this.closest('.show_image_container');
+
+                // 選択状態を切り替える
+                container.classList.toggle('selected');
+                updateSelectedCount(); // 選択された画像の数を更新する
+                updateSelectedFilesInput(); // 選択された画像のIDを更新する
+                // ボタンのラベルを切り替える
+                if (container.classList.contains('selected')) {
+                    this.textContent = '選択解除'; // 選択解除のラベルに変更
+                } else {
+                    this.textContent = '選択'; // 選択のラベルに変更
+                }
+            });
         });
     });
 
-    // 画像をクリックして選択状態を切り替える関数
-    function toggleSelection(container) {
-        container.classList.toggle('selected'); // 選択状態の切り替え
-    }
 
     // 選択された画像の数を更新する関数
     function updateSelectedCount() {
         var selectedCount = document.querySelectorAll('.show_image_container.selected').length;
         document.getElementById('selectedCount').textContent = '選択された画像: ' + selectedCount;
+    }
+
+    function updateSelectedFilesInput() {
+        var selectedFiles = [];
+        document.querySelectorAll('.show_image_container.selected').forEach(function(container) {
+            selectedFiles.push(container.dataset.fileId); // data-file-id属性からファイルIDを取得
+        });
+        document.getElementById('selectedFilesInput').value = selectedFiles.join(','); // カンマ区切りの文字列に変換してhidden inputに設定
     }
 
     // 大きな画像領域をクリックしたら非表示にする（オーバーレイを閉じる）

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\File;
+
+use App\Models\File;
 use Illuminate\Http\Request;
 
 class PreviewController extends Controller
 {
     public function index(){
-        $files = File::All();
+        //$files = File::All();
+        $files = File::where('status', 1)->get();
         return view('user.preview', compact('files'));
     }
 
