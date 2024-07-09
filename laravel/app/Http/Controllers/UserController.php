@@ -7,43 +7,46 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
 use GuzzleHttp\Client;
+use Exception;
 
 class UserController extends Controller
 {
     public function index() {
 
-        $cityName='Tokyo';
-        $apiKey = '98371b3bc8058204e1013851c7064d92';
-        $url = "http://api.openweathermap.org/data/2.5/forecast?units=metric&lang=ja&q=$cityName&appid=$apiKey";
+        $cityName='Osaka';
 
+        //$url = "http://api.openweathermap.org/data/2.5/weather? units=metric&lang=ja&q=$cityName&appid=$apiKey";
+
+        $apiKey = config('weatherapi.weather_api_key');
+        $url = config('weatherapi.weather_api_url'). "?units=metric&lang=ja&q=$cityName&appid=$apiKey";
         $method = "GET";
 
         $client = new Client();
 
         try {
+            // APIにリクエストを送信し、レスポンスを取得
             $response = $client->request($method, $url);
             $data = $response->getBody();
-            $data = json_decode($data, true);
+            $weatherData = json_decode($data, true);
 
             // 天気と気温に関するデータを抽出
-            $weatherData = [];
-            foreach ($data['list'] as $forecast) {
-                $weatherData[] = [
-                    'datetime' => $forecast['dt_txt'],
-                    'description' => $forecast['weather'][0]['description'],
-                    'temperature' => $forecast['main']['temp'],
-                    'feels_like' => $forecast['main']['feels_like'],
-                    'humidity' => $forecast['main']['humidity'],
-                    'wind_speed' => $forecast['wind']['speed']
-                ];
-            }
+            $weather = [
+                'datetime' => date('Y-m-d H:i:s', $weatherData['dt']),
+                'description' => $weatherData['weather'][0]['description'],
+                'temperature' => $weatherData['main']['temp'],
+                'feels_like' => $weatherData['main']['feels_like'],
+                'humidity' => $weatherData['main']['humidity'],
+                'wind_speed' => $weatherData['wind']['speed']
+            ];
 
-            // データをビューに渡す
-            return view('user.testApi', ['weatherData' => $weatherData]);
-        } catch (\GuzzleHttp\Exception\ClientException $e) {
-            // エラーメッセージを処理する
-            return response()->json(['error' => 'APIリクエストが失敗しました。'], 500);
+            // ビューにデータを渡す
+            return view('user.testApi', ['weather' => $weather]);
+
+        } catch (Exception $e) {
+            // エラーハンドリング
+            return view('user.testApi', ['error' => $e->getMessage()]);
         }
+
     }
 }
 
