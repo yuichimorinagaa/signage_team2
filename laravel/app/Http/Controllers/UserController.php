@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index() {
 
-        $cityName='Osaka';
+        $cityName='Kawasaki';
 
         //$url = "http://api.openweathermap.org/data/2.5/weather? units=metric&lang=ja&q=$cityName&appid=$apiKey";
 
