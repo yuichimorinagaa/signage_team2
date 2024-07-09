@@ -30,7 +30,7 @@ class FileRequest extends FormRequest
     public function messages()
     {
         return [
-            'file.required' => 'ファイルが選択されていません',
+            'file.required' => 'アップロードするファイルを選択してください',
             'file.mimes' => '許可されたファイルタイプはjpeg,jpg,pngです',
         ];
     }

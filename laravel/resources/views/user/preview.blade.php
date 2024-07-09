@@ -5,70 +5,72 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- BootstrapのCSS読み込み -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- FontAwesomeの読み込み -->
+    <link href="https://use.fontawesome.com/releases/v6.5.2/css/all.css" rel="stylesheet">
     <title>Document</title>
 
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            margin: 0;
+            display: flex;  /*フレックスコンテナの指定*/
+            flex-direction: column; /*アイテムの配置を上から下に並べる*/
+            height:calc(100vh - 50px); /*50pxだけ引いた残り全部*/
+            margin: 0; /*デフォルトの余白を除去*/
+            background-color:#F0F5F9;
         }
         h1 {
-            text-align: center;
+            text-align: center; /*テキストを水平方向に中央揃え*/
         }
         #content {
             display: flex;
-            flex: 1;
+            flex: 1; /*フレックスコンテナ内の空いているスペースを取得、コンテナより大きい場合は収縮*/
+            margin-top:37px;
         }
         #image-list {
             width: 20%;
             padding: 10px;
-            box-sizing: border-box;
-            overflow-y: auto;
+            box-sizing: border-box; /*ボックスサイズがボーダー込みになる*/
+            overflow-y: auto; /*要素内の内容が要素自体の高さを超えた場合スクロールバー表示*/
             border-right: 1px solid #ccc;
         }
         #image-list img {
             width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
+            /*height: auto; /*画像の高さに自動調整*/
+            aspect-ratio: 16 / 9; /*幅と高さの割合の設定*/
+            object-fit: cover; /*要素のボックスにコンテンツを合わせる*/
         }
         #slideshow-container {
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 5px;
+            align-items: center; /*横の中央*/
+            padding:15px 50px;
             box-sizing: border-box;
         }
-        #slideshow {
-            width: 100%;
-            height: 50vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
         #slideshow img {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 100%; /*親要素の幅マックス*/
+            max-height: 100%; /*親要素の高さマックス*/
             aspect-ratio: 16 / 9;
             object-fit: cover;
+            display:flex;
+            justify-content:center;
+
         }
         .message{
             text-align:center;
             vertical-align: center;
         }
         .navigation {
-            margin-top: 100px;
             display: flex;
             justify-content: center;
         }
         .navigation button {
-            background-color: floralwhite;
+            background-color:#606060;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
+            color:white;
         }
         .navigation button:hover {
             background-color: gray;
@@ -78,22 +80,69 @@
             padding: 10px;
         }
         .form-container button {
-            background-color: navajowhite;
+            background-color: gray;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
+            color:white;
         }
         .form-container button:hover {
             background-color: gray;
         }
+        .btn-danger{
+            background-color: rgba(255, 255, 255, 0.3);
+            transition:all 0.5s;
+            border-color:rgba(255, 255, 255, 0.3);
+        }
+        header {
+            height:45px;
+            width: 100%;
+            background-color: rgba(34, 49, 52, 0.9);
+            display: flex;
+            align-items: center; /* 垂直方向の中央揃え */
+            justify-content: space-between; /* 水平方向の中央揃え */
+
+            box-sizing: border-box;
+            color: white;
+            position:fixed;
+        }
+        header p{
+            color:white;
+            font-size:30px;
+            font-weight:bold;
+            font-family: "Noto Serif", sans-serif;
+            padding:20px 0 0 7px;
+
+        }
+        .logout-form {
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        .logout-form button {
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            color: white;
+            height:45px;
+        }
+
+
     </style>
 
 </head>
+<header>
+    <p>Preview</p>
+    <form action="{{ route('logout') }}" method="POST" class="logout-form">
+        @csrf
+        <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-sign-out-alt"></i> ログアウト
+        </button>
+    </form>
+</header>
 <body>
 
-<header>
-    <h1>プレビュー画面</h1>
-</header>
+
 
 @if(session('success'))
     <div>{{ session('success') }}</div>
@@ -101,8 +150,7 @@
 
 <div id="content">
     <div id="image-list">
-        <h3>アップロードした画像</h3>
-        <p>サイネージの背景に設定する画像を選択してください</p>
+        <p>サイネージに表示する画像を選択できます</p>
         <form action="{{ route('preview.update') }}" method="POST">
             @csrf
             @foreach($files as $file)
@@ -113,14 +161,14 @@
                         {{ $file->status == 1 ? 'checked' : '' }}>
                 </div>
         @endforeach
-        <button type="submit">使用</button>
+        <button type="submit">変更を適用</button>
         </form>
     </div>
 
 
     <div id="slideshow-container">
         <div id="selected-images">
-            <h3>使用する画像</h3>
+
             @php
                 $hasSelectedImages = false;
             @endphp
@@ -145,19 +193,19 @@
 
         @if($hasSelectedImages)
             <div class="navigation">
-                <button id="prev">&lt;</button>
-                <button id="next">&gt;</button>
+                <button id="prev" title="前の写真">&lt;</button>
+                <button id="next" title="次の写真">&gt;</button>
             </div>
         @endif
+        <div class="form-container">
+            <form action="{{ route('preview.backToUpload') }}" method="post">
+                @csrf
+                <button class="return-button" type="submit">画像アップロード画面に戻る</button>
+            </form>
+        </div>
     </div>
 </div>
 
-<div class="form-container">
-    <form action="{{ route('preview.backToUpload') }}" method="post">
-        @csrf
-        <button type="submit">画像アップロード画面に戻る</button>
-    </form>
-</div>
 
 
 @if($hasSelectedImages)

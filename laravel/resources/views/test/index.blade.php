@@ -52,3 +52,77 @@
 </script>
 </body>
 </html>
+
+.btn-danger{
+float:right;
+background-color: rgba(255, 255, 255, 0.3);
+transition:all 0.5s;
+border-color:rgba(255, 255, 255, 0.3);
+height:45px;
+cursor:pointer;
+}
+header {
+height: 45px;
+width: 100%;
+background-color: rgba(34, 49, 52, 0.9);
+
+}
+header p{
+color:white;
+font-size:30px;
+font-family: "Noto Serif", sans-serif;
+font-weight:bold;
+float:left
+}
+
+#image-list {
+width: 20%;
+padding: 10px;
+box-sizing: border-box;
+overflow-y: auto;
+border-right: 1px solid #ccc;
+}
+#image-list img {
+width: 100%;
+height: auto;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+}
+
+#slideshow img {
+max-width: 100%;
+max-height: 100%;
+aspect-ratio: 16 / 9;
+object-fit: cover;
+}
+.message{
+text-align:center;
+vertical-align: center;
+}
+.navigation {
+margin-top: 100px;
+display: flex;
+justify-content: center;
+}
+.navigation button {
+background-color: floralwhite;
+border: none;
+padding: 10px 20px;
+cursor: pointer;
+}
+.navigation button:hover {
+background-color: gray;
+}
+.form-container {
+text-align: center;
+padding: 10px;
+}
+.form-container button {
+background-color: navajowhite;
+border: none;
+padding: 10px 20px;
+cursor: pointer;
+}
+.form-container button:hover {
+background-color: gray;
+}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
@@ -27,6 +28,15 @@ class LoginController extends Controller
         }
         return redirect()->route('login.index')->withErrors([
             'email'=>'メールアドレスまたはパスワードが間違っています。',
+        ]);
+    }
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login.index')->with([
+            'message'=>'ログアウトしました'
         ]);
     }
 }
