@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('grade');
             $table->string('university');
-            $table->string('profile_photo_path')->nullable()->default('default.png');
+            $table->string('profile_photo_path')->nullable()->default('profile_photo/default.png');
             $table->date('joining_date');
             $table->string('comment');
             $table->string('hobbies');

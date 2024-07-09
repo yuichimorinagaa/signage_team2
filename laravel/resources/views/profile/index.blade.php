@@ -34,7 +34,7 @@
             profiles = profiles.map(profile => {
                 return {
                     ...profile,
-                    profile_photo_path: "{{ asset('storage/profile_photo') }}/" + profile.profile_photo_path
+                    profile_photo_path: "{{ asset('storage') }}/" + profile.profile_photo_path
                 };
             });
 
