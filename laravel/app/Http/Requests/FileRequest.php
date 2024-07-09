@@ -21,6 +21,9 @@ class FileRequest extends FormRequest
      */
     public function rules(): array
     {
+
+
+
         return [
             'file' => 'required|file|mimes:jpeg,jpg,png',
         ];
@@ -30,7 +33,7 @@ class FileRequest extends FormRequest
     public function messages()
     {
         return [
-            'file.required' => 'アップロードするファイルを選択してください',
+            'file.required' => 'ファイルが選択されていません',
             'file.mimes' => '許可されたファイルタイプはjpeg,jpg,pngです',
         ];
     }

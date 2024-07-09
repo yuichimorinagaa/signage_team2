@@ -5,8 +5,13 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PreviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SignageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\UserController;
+
+use App\Http\Controllers\NewsController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +56,6 @@ Route::post('profiles/form/store', [ProfileController::class, 'store'])->name('p
 Route::get('profiles/form/thanks', [ProfileController::class, 'thanks'])->name('profiles.thanks');
 
 Route::get('users/testApi', [UserController::class, 'index'])-> name('testApi');
-
+//Route::get('/', [UserController::class, 'index']);
 
 

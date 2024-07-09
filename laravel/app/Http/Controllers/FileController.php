@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FileRequest;
+use App\Http\Requests\PreviewRequest;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +16,7 @@ class FileController extends Controller
     {
         // バリデーション
 
-            // ファイルを保存し、パスを取得
+
             $request->validated();
 
             // ファイルを保存し、パスを取得
@@ -50,8 +51,12 @@ class FileController extends Controller
         return redirect()->route('file.select')->with('success', 'ファイルが選択されました。');
     }
 
-    public function statusChange(Request $request)
+    public function statusChange(PreviewRequest $request)
     {
+        // バリデーションルールを定義
+
+        // バリデーション実行
+
         $selectedFiles = $request->input('selected_files', '');
 
         // 選択されたファイルIDを配列に変換

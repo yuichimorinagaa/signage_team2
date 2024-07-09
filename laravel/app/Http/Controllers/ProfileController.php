@@ -40,7 +40,7 @@ class ProfileController extends Controller
             'if_ceo' => 'required|string|max:255',
         ]);
         if ($request->hasFile('profile_photo_path')) {
-            $filePath = $request->file('profile_photo_path')->store('profile_photos', 'public');
+            $filePath = $request->file('profile_photo_path')->store('profile_photo', 'public');
             $validatedData['profile_photo_path'] = $filePath;
         }
 
