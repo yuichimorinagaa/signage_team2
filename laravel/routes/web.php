@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SignageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,7 @@ Route::post('tests/upload',[TestController::class, 'upload'])->name('tests.uploa
 Route::get('login',[LoginController::class,'loginShow'])->name('login.index');
 Route::get('register',[RegisterController::class,'registerShow'])->name('register.index');
 Route::post('register/',[RegisterController::class,'store'])->name('login.store');
-Route::post('login',[LoginController::class,'login'])->name('user.login');
+Route::post('login/',[LoginController::class,'login'])->name('user.login');
 Route::middleware('auth')->group(function(){
     Route::get('admin',[AdminController::class,'adminShow'])->name('admin.index');
     Route::delete('admin/{id}',[AdminController::class,'delete'])->name('admin.delete');
@@ -40,14 +41,12 @@ Route::middleware('auth')->group(function(){
     Route::post('users/file', [FileController::class,'store'])->name('file.store');
     Route::post('users/file/select', [FileController::class, 'selectFiles'])->name('file.select');
     Route::post('users/file/change', [FileController::class, 'statusChange'])->name('file.statusChange');
-    Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index'); Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
-    Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');Route::post('logout',[LoginController::class,'logout'])->name('logout');
-
+    Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index');
+    Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
+    Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');
+    Route::post('logout',[LoginController::class,'logout'])->name('logout');
 });
 
-Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index');
-Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
-Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');
 
 Route::get('profiles/index',[ProfileController::class,'index'])->name('profiles.index');
 Route::get('profiles/form',[ProfileController::class,'showForm'])->name('profiles.showForm');
