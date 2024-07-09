@@ -13,10 +13,12 @@ class UserController extends Controller
 {
     public function index() {
 
-        $cityName='Kawasaki';
-        $apiKey = '98371b3bc8058204e1013851c7064d92';
-        $url = "http://api.openweathermap.org/data/2.5/weather?units=metric&lang=ja&q=$cityName&appid=$apiKey";
+        $cityName='Osaka';
 
+        //$url = "http://api.openweathermap.org/data/2.5/weather? units=metric&lang=ja&q=$cityName&appid=$apiKey";
+
+        $apiKey = config('weatherapi.weather_api_key');
+        $url = config('weatherapi.weather_api_url'). "?units=metric&lang=ja&q=$cityName&appid=$apiKey";
         $method = "GET";
 
         $client = new Client();
@@ -42,7 +44,7 @@ class UserController extends Controller
 
         } catch (Exception $e) {
             // エラーハンドリング
-            return view('weather.error', ['error' => $e->getMessage()]);
+            return view('user.testApi', ['error' => $e->getMessage()]);
         }
 
     }
