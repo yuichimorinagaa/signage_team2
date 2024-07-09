@@ -35,15 +35,18 @@ Route::middleware('auth')->group(function(){
     Route::get('admin',[AdminController::class,'adminShow'])->name('admin.index');
     Route::delete('admin/{id}',[AdminController::class,'delete'])->name('admin.delete');
     Route::get('users/file',[FileController::class,'index'])->name('file.index');
-    Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.delete');
-    Route::post('users/file', [FileController::class,'store'])->name('file.store');
-    Route::post('users/file/select', [FileController::class, 'selectFiles'])->name('file.select');
-    Route::post('users/file/change', [FileController::class, 'statusChange'])->name('file.statusChange');
-    Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index'); Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
-    Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');Route::post('logout',[LoginController::class,'logout'])->name('logout');
 
 });
 
 
+Route::middleware('auth')->group(function () {
+Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.delete');
+Route::post('users/file', [FileController::class,'store'])->name('file.store');
+Route::post('users/file/select', [FileController::class, 'selectFiles'])->name('file.select');
+Route::post('users/file/change', [FileController::class, 'statusChange'])->name('file.statusChange');
+Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index'); Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
+Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');
+Route::post('logout',[LoginController::class,'logout'])->name('logout');
+});
 
 
