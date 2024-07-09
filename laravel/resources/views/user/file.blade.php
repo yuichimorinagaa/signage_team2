@@ -304,6 +304,8 @@
         font-size:30px;
         font-family: "Noto Serif", sans-serif;
         font-weight:bold;
+        padding:20px 0 0 7px;
+
     }
     .fa-regular{
         margin-right:5px;
