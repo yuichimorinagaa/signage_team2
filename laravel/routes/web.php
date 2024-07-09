@@ -3,10 +3,15 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PreviewController;
-
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SignageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\UserController;
+
+use App\Http\Controllers\NewsController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return route('logout');
+    return view('welcome');
 });
 
 Route::get('tests',[TestController::class,'index'])->name('tests.index');
@@ -48,5 +53,14 @@ Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.
 Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');
 Route::post('logout',[LoginController::class,'logout'])->name('logout');
 });
+
+
+Route::get('profiles/index',[ProfileController::class,'index'])->name('profiles.index');
+Route::get('profiles/form',[ProfileController::class,'showForm'])->name('profiles.showForm');
+Route::post('profiles/form/store', [ProfileController::class, 'store'])->name('profiles.store');
+Route::get('profiles/form/thanks', [ProfileController::class, 'thanks'])->name('profiles.thanks');
+
+Route::get('users/testApi', [UserController::class, 'index'])-> name('testApi');
+//Route::get('/', [UserController::class, 'index']);
 
 

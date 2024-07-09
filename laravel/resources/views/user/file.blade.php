@@ -25,7 +25,7 @@
     <p>File Upload</p>
 </header>
 <body>
-<h2>画像選択画面</h2>
+
 
 
 @if ($errors->any())
@@ -89,21 +89,22 @@
 
 
 
-                <form action="{{ route('file.select') }}" method="POST">
-                    @csrf
-                    <!-- ボタンを通常のボタンとして扱う -->
-                    <button type="button" class="btn btn-info select-image">
-                        {{ $file->status == 0 ? '選択' : '選択解除' }}
-                    </button>
-                    <!-- 選択されたファイルのIDを隠しフィールドで送信 -->
-                    <input type="hidden" name="selected_files[]" value="{{ $file->id }}">
-                </form>
-                <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button title="削除" type="submit" class="delete_button"><i class="fa-solid fa-circle-minus"></i></button>
-                </form>
-            </div>
+            <form action="{{ route('file.select') }}" method="POST">
+                @csrf
+                <!-- ボタンを通常のボタンとして扱う -->
+                <button type="button" class="btn btn-info select-image">
+                    選択
+                </button>
+                <!-- 選択されたファイルのIDを隠しフィールドで送信 -->
+                <input type="hidden" name="selected_files[]" value="{{ $file->id }}">
+            </form>
+            <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+
+                <button title="削除" type="submit" class="delete_button"><i class="fa-solid fa-circle-minus"></i></button>
+            </form>
+
         </div>
     @endforeach
 </div>
