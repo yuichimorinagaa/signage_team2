@@ -60,3 +60,5 @@ Route::get('/api/weather', [UserController::class, 'fetchWeather'])->name('fetch
 
 
 Route::get('profiles/indexTwo',[ProfileController::class,'indexTwo'])->name('profiles.index2');
+
+Route::get('signage' ,[SignageController::class,'index'])->name('signage.index');

@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body, html {
             margin: 0;
@@ -38,14 +39,38 @@
 
         .clock {
             position: absolute;
-            top: 20px;
+            top: 10px;
             left: 20px;
             color: white;
-            font-size: 60px;
+            font-size: 85px;
             font-weight: 300;
             font-family: 'cursive', serif;
             padding: 10px 20px;
             z-index: 2;
+        }
+
+        .weather {
+            position: absolute;
+            top: 150px;
+            left: 20px;
+            width: 15%;
+            background-color: rgba(36, 139, 255, 0.5);
+            color: white;
+            display: flex;
+            z-index: 2;
+        }
+
+        .weather-top {
+            text-align: center;
+            flex: 0 0 50%;
+            padding: 10px;
+        }
+
+        .weather-info{
+            flex: 1;
+            padding-top: 30px;
+            flex-direction: column;
+            justify-content: space-evenly;
         }
 
 
@@ -114,6 +139,12 @@
         @endforeach
     </div>
 
+    <!-- 天気の表示-->
+    <div id="weather-info" class="weather">
+        <!-- 天気情報をここに表示 -->
+    </div>
+    <!-- 天気の表示終わり-->
+    <!-- 自己紹介カードの表示 -->
     <div class="profile">
         <div class="profile-top">
             <div class="image">
@@ -146,6 +177,7 @@
                 <p><strong>⭐️コメント:</strong>&emsp;<span id="profile-comment"></span></p>
             </div>
         </div>
+        <!-- 自己紹介カードの表示終わり -->
     </div>
 
     <script>
@@ -176,6 +208,40 @@
 
         setInterval(updateClock, 1000);
         updateClock();
+
+        <!-- 天気の表示 -->
+        $(document).ready(function() {
+            function fetchWeatherData() {
+                $.ajax({
+                    url: '{{ route('fetch.weather') }}', // APIデータ取得のURL
+                    method: 'GET',
+                    success: function(data) {
+                        if (data.error) {
+                            $('#weather-info').html('<p>' + data.error + '</p>');
+                        } else {
+                            $('#weather-info').html(`
+                                <div class="weather-top">
+                                    <p> ${data.description}</p>
+                                    <p><img src="http://openweathermap.org/img/wn/${data.icon}@2x.png" alt="Weather Icon"></p>
+                                </div>
+                                <div class="weather-info">
+                                    <p>🌡️ ${data.temperature}°C</p>
+                                    <p>💧 ${data.humidity}%</p>
+                                    <p>༄ ${data.wind_speed} m/s</p>
+                                </div>
+                            `);
+                        }
+                    },
+                    error: function() {
+                        $('#weather-info').html('<p>Failed to fetch weather data.</p>');
+                    }
+                });
+            }
+
+            setInterval(fetchWeatherData, 300000); // 5分ごとにデータを取得
+            fetchWeatherData(); // 初回データ取得
+        });
+        <!-- 天気の表示終わり -->
 
         document.addEventListener("DOMContentLoaded", function() {
             let profiles = @json($profiles);
