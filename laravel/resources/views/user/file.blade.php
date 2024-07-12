@@ -100,14 +100,16 @@
                 <!-- 選択されたファイルのIDを隠しフィールドで送信 -->
                 <input type="hidden" name="selected_files[]" value="{{ $file->id }}">
             </form>
+            @if ($file->user_id == Auth::id())
             <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                
+
                 <button title="削除" type="submit" class="delete_button"><i class="fa-solid fa-circle-minus"></i></button>
             </form>
-
+            @endif
         </div>
+    </div>
     @endforeach
 </div>
 
