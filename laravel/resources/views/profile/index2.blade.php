@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+
         body, html {
             margin: 0;
             padding: 0;
@@ -15,51 +16,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: black;
+            background-color: #75A9FF;
         }
-
-        .main-image {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%;
-            background-color: black;
-        }
-
-        .main-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-
-        .clock {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: white;
-            font-size: 60px;
-            font-weight: 300;
-            font-family: 'cursive', serif;
-            padding: 10px 20px;
-            z-index: 2;
-        }
-
 
         .profile{
             position: absolute;
-            top: 300px;
-            right: 100px;
+            top: 100px;
+            left: 600px;
             width: 40%;
             height: 30%;
             border: solid 2px;
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
             display: flex;
-            z-index: 3;
         }
 
         .profile-top{
@@ -103,80 +72,8 @@
             display: block;
         }
 
-
     </style>
-</head>
-<body>
-    <div class="main-image">
-        <div class="clock" id="clock"></div>
-        @foreach($images as $image)
-            <img src="{{ asset('storage/image/' .$image->file_path) }}" alt="">
-        @endforeach
-    </div>
-
-    <div class="profile">
-        <div class="profile-top">
-            <div class="image">
-                <img id="profile-photo" src="" alt="Profile Photo">
-            </div>
-            <div class="name">
-                <h1 id="profile-name"></h1>
-            </div>
-        </div>
-        <div class="profile-info">
-            <div class="first-info">
-                <p><strong>⭐️学年:</strong>&emsp;<span id="profile-grade"></span></p>
-                <p><strong>⭐️大学:</strong>&emsp;<span id="profile-university"></span></p>
-                <p><strong>⭐️入社日:</strong>&emsp;<span id="profile-joining-date"></span></p>
-                <p><strong>⭐️趣味:</strong>&emsp;<span id="profile-hobbies"></span></p>
-                <p><strong>⭐️MBTI:</strong>&emsp;<span id="profile-mbti"></span></p>
-            </div>
-            <div class="second-info">
-                <p><strong>⭐️高校:</strong>&emsp;<span id="profile-high-school"></span></p>
-                <p><strong>⭐️出身地:</strong>&emsp;<span id="profile-hometown"></span></p>
-                <p><strong>⭐️誕生日:</strong>&emsp;<span id="profile-birthday"></span></p>
-                <p><strong>⭐️座右の銘:</strong>&emsp;<span id="profile-motto"></span></p>
-                <p><strong>⭐️ひようらの推し:</strong>&emsp;<span id="profile-restaurants"></span></p>
-            </div>
-            <div class="third-info">
-                <p><strong>⭐️部活・サークル:</strong>&emsp;<span id="profile-club-activities"></span></p>
-                <p><strong>⭐️好きな芸能人:</strong>&emsp;<span id="profile-famous-person"></span></p>
-                <p><strong>⭐️音楽:</strong>&emsp;<span id="profile-artists"></span></p>
-                <p><strong>⭐️もし私が社長なら、、:</strong>&emsp;<span id="profile-if-ceo"></span></p>
-                <p><strong>⭐️コメント:</strong>&emsp;<span id="profile-comment"></span></p>
-            </div>
-        </div>
-    </div>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let currentIndex = 0;
-            const images = document.querySelectorAll('.main-image img');
-            const totalImages = images.length;
-
-            function showNextImage() {
-                images[currentIndex].style.display = 'none';
-                currentIndex = (currentIndex + 1) % totalImages;
-                images[currentIndex].style.display = 'block';
-            }
-
-            images.forEach((img, index) => {
-                img.style.display = index === 0 ? 'block' : 'none';
-            });
-
-            setInterval(showNextImage, 60000);
-        });
-
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}`;
-        }
-
-        setInterval(updateClock, 1000);
-        updateClock();
-
         document.addEventListener("DOMContentLoaded", function() {
             let profiles = @json($profiles);
 
@@ -225,11 +122,48 @@
                 sections[currentSectionIndex].classList.add('visible');
             }
 
-            setInterval(rotateProfiles, 30000); // 15秒ごとにプロフィールを変更
-            setInterval(rotateSections, 10000)
+            setInterval(rotateProfiles, 15000); // 15秒ごとにプロフィールを変更
+            setInterval(rotateSections, 5000)
             rotateProfiles(); // 初期表示
 
         });
     </script>
+</head>
+<body>
+<div class="profile">
+    <div class="profile-top">
+        <div class="image">
+            <img id="profile-photo" src="" alt="Profile Photo">
+        </div>
+        <div class="name">
+            <h1 id="profile-name"></h1>
+        </div>
+    </div>
+    <div class="profile-info">
+        <div class="first-info">
+            <p><strong>⭐️学年:</strong>&emsp;<span id="profile-grade"></span></p>
+            <p><strong>⭐️大学:</strong>&emsp;<span id="profile-university"></span></p>
+            <p><strong>⭐️入社日:</strong>&emsp;<span id="profile-joining-date"></span></p>
+            <p><strong>⭐️趣味:</strong>&emsp;<span id="profile-hobbies"></span></p>
+            <p><strong>⭐️MBTI:</strong>&emsp;<span id="profile-mbti"></span></p>
+        </div>
+        <div class="second-info">
+            <p><strong>⭐️高校:</strong>&emsp;<span id="profile-high-school"></span></p>
+            <p><strong>⭐️出身地:</strong>&emsp;<span id="profile-hometown"></span></p>
+            <p><strong>⭐️誕生日:</strong>&emsp;<span id="profile-birthday"></span></p>
+            <p><strong>⭐️座右の銘:</strong>&emsp;<span id="profile-motto"></span></p>
+            <p><strong>⭐️ひようらの推し:</strong>&emsp;<span id="profile-restaurants"></span></p>
+        </div>
+        <div class="third-info">
+            <p><strong>⭐️部活・サークル:</strong>&emsp;<span id="profile-club-activities"></span></p>
+            <p><strong>⭐️好きな芸能人:</strong>&emsp;<span id="profile-famous-person"></span></p>
+            <p><strong>⭐️音楽:</strong>&emsp;<span id="profile-artists"></span></p>
+            <p><strong>⭐️もし私が社長なら、、:</strong>&emsp;<span id="profile-if-ceo"></span></p>
+            <p><strong>⭐️コメント:</strong>&emsp;<span id="profile-comment"></span></p>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

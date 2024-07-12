@@ -58,3 +58,4 @@ Route::get('users/testApi', [UserController::class, 'index'])-> name('testApi');
 
 Route::get('signage', [SignageController::class, 'index'])->name('signage.index');
 
+Route::get('profiles/indexTwo',[ProfileController::class,'indexTwo'])->name('profiles.index2');
