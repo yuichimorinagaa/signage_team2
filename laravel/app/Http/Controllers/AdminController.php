@@ -18,12 +18,11 @@ class AdminController extends Controller
         $user=User::find($request['id']);
         if($user->id==$request['id']){
             $user->delete();
-            Auth::logout();
-            return redirect()->route('login.index');
+            return redirect()->route('admin.index');
+
 
         }
-        $user->delete();
 
-        return redirect()->route('admin.index');
+        return redirect()->route('admin.index')->withErrors('User not found');
     }
 }
