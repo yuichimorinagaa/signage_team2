@@ -54,6 +54,7 @@
             top: 150px;
             left: 20px;
             width: 15%;
+            border-radius: 5%;
             background-color: rgba(36, 139, 255, 0.5);
             color: white;
             display: flex;
@@ -81,6 +82,7 @@
             width: 40%;
             height: 30%;
             border: solid 2px;
+            border-radius: 5%;
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
             display: flex;
