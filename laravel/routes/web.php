@@ -39,6 +39,7 @@ Route::post('login',[LoginController::class,'login'])->name('user.login');
 Route::middleware('auth')->group(function(){
     Route::get('admin',[AdminController::class,'adminShow'])->name('admin.index');
     Route::delete('admin/{id}',[AdminController::class,'delete'])->name('admin.delete');
+    Route::delete('admin/file/{id}', [AdminController::class,'deleteFile'])->name('admin.deleteFile');
     Route::get('users/file',[FileController::class,'index'])->name('file.index');
     Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.delete');
     Route::post('users/file', [FileController::class,'store'])->name('file.store');
