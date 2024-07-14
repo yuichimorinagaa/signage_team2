@@ -22,7 +22,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required','email','unique:users'],
+            'email' => ['required','email','unique:users', 'regex:/@social-db\.co\.jp$/'],
             'password' => ['required','min:8'],
             'invitation_code'=>['required','in:sdb-intern'],
         ];
@@ -35,6 +35,7 @@ class RegisterRequest extends FormRequest
             'email.unique'=>'このメールアドレスは既に登録されています。',
             'email.required' => 'メールアドレスは必須です。',
             'email.email'=>'有効なメールアドレスを入力してください。',
+            'email.regex'=>'有効なメールアドレスを使用してください',
             'password.required' => 'パスワードを入力してください。',
             'invitation_code.required'=>'招待コードを入力してください。',
             'invitation_code.in'=>'招待コードが正しくありません。'

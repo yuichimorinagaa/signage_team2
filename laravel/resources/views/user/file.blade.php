@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <!-- BootstrapのCSS読み込み -->
+
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- FontAwesomeの読み込み -->
     <link href="https://use.fontawesome.com/releases/v6.5.2/css/all.css" rel="stylesheet">
@@ -82,11 +83,11 @@
 <div class="image-grid">
 
 
-    @foreach($files as $file)
-        <div class="show_image_container" data-file-id="{{ $file->id }}">
+@foreach($files as $file)
+    <div class="show_image_container" data-file-id="{{ $file->id }}">
 
-            <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
-            <div class="button_array">
+        <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
+        <div class="button_array">
 
 
 
@@ -182,7 +183,7 @@
     //jQueryで選択したファイルパスを表示//
     $('input').on('change', function () {
         var file = $(this).prop('files')[0];
-        $('#file-name').text(file.name);
+        $('p').text(file.name);
     });
 </script>
 
