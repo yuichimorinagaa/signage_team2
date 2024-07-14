@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function(){
     Route::get('admin',[AdminController::class,'adminShow'])->name('admin.index');
     Route::delete('admin/{id}',[AdminController::class,'delete'])->name('admin.delete');
     Route::get('users/file',[FileController::class,'index'])->name('file.index');
-
+    Route::get('admin/select',[AdminController::class,'select'])->name('admin.select');
 });
 
 

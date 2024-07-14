@@ -19,5 +19,8 @@
         <button>削除する</button>
     </form>
 @endforeach
+<form action="{{route('file.index')}}">
+    <button class="btn btn-primary">アップロード画面</button>
+</form>
 </body>
 </html>

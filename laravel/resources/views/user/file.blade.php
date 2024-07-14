@@ -38,7 +38,6 @@
     </div>
 @endif
 
-<div id="selectedCount">選択された画像: 0</div>
 
 
 
@@ -51,7 +50,7 @@
                 <input  type="file" name="file" >
                 <i class="fa-regular fa-file-image"></i>ファイルを選択
             </label>
-            <p>選択されていません</p>
+            <p id="file-name">選択されていません</p>
             <button type="submit" class="btn btn-primary upload">
                 <i class="fa-solid fa-upload"></i>アップロード
             </button>
@@ -81,30 +80,34 @@
 @endif
 
 <div class="image-grid">
-@foreach($files as $file)
-    <div class="show_image_container" data-file-id="{{ $file->id }}">
-
-        <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
-        <div class="button_array">
 
 
+    @foreach($files as $file)
+        <div class="show_image_container" data-file-id="{{ $file->id }}">
 
-            <form action="{{ route('file.select') }}" method="POST">
-                @csrf
-                <!-- ボタンを通常のボタンとして扱う -->
-                <button type="button" class="btn btn-info select-image">
-                    選択
-                </button>
-                <!-- 選択されたファイルのIDを隠しフィールドで送信 -->
-                <input type="hidden" name="selected_files[]" value="{{ $file->id }}">
-            </form>
-            <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
-                @csrf
-                @method('DELETE')
+            <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
+            <div class="button_array">
 
-                <button title="削除" type="submit" class="delete_button"><i class="fa-solid fa-circle-minus"></i></button>
-            </form>
 
+
+                <form action="{{ route('file.select') }}" method="POST">
+                    @csrf
+                    <!-- ボタンを通常のボタンとして扱う -->
+                    <button type="button" class="btn btn-info select-image">
+                        選択
+                    </button>
+                    <!-- 選択されたファイルのIDを隠しフィールドで送信 -->
+                    <input type="hidden" name="selected_files[]" value="{{ $file->id }}">
+                </form>
+                @if ($file->user_id == Auth::id())
+                    <form action="{{ route('file.delete',['id'=>$file->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <button title="削除" type="submit" class="delete_button"><i class="fa-solid fa-circle-minus"></i></button>
+                    </form>
+                @endif
+            </div>
         </div>
     @endforeach
 </div>
@@ -179,7 +182,7 @@
     //jQueryで選択したファイルパスを表示//
     $('input').on('change', function () {
         var file = $(this).prop('files')[0];
-        $('p').text(file.name);
+        $('#file-name').text(file.name);
     });
 </script>
 
@@ -315,9 +318,8 @@
     header p{
         color:white;
         font-size:30px;
-0        font-weight:bold;
-        padding:20px 0 0 7px;
-
+        font-family: "Noto Serif", sans-serif;
+        font-weight:bold;
     }
     .fa-regular{
         margin-right:5px;
