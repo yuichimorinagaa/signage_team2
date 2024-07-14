@@ -42,10 +42,18 @@
         body{
             background-color:#F0F5F9;
         }
+        .alert-success{
+            text-align:center;
+        }
     </style>
 </head>
 <body>
 <div class="container">
+    @if(session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
     <h1 class="login_logo">Login</h1>
     <form action="{{route('user.login')}}" method="post">
         @error('email')
@@ -65,7 +73,8 @@
         </div>
         <button type="submit" class="btn btn-secondary">ログイン</button>
     </form>
-    <a  href="{{route('register.index')}}">新規登録はこちら</a>
+    <a href="{{route('register.index')}}">新規登録はこちら</a>
+
 </div>
 </body>
 </html>

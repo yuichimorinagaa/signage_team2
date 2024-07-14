@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EditController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PreviewController;
 use App\Http\Controllers\ProfileController;
@@ -49,12 +50,13 @@ Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.
 Route::post('users/file', [FileController::class,'store'])->name('file.store');
 Route::post('users/file/select', [FileController::class, 'selectFiles'])->name('file.select');
 Route::post('users/file/change', [FileController::class, 'statusChange'])->name('file.statusChange');
-Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index'); Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
+Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index');
+Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
 Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');
 Route::post('logout',[LoginController::class,'logout'])->name('logout');
 });
 
-
+Route::get('edit',EditController::class)->name('edit.index');
 Route::get('profiles/index',[ProfileController::class,'index'])->name('profiles.index');
 Route::get('profiles/form',[ProfileController::class,'showForm'])->name('profiles.showForm');
 Route::post('profiles/form/store', [ProfileController::class, 'store'])->name('profiles.store');
