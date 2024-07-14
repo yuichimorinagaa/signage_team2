@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\EditController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PreviewController;
 use App\Http\Controllers\ProfileController;
@@ -56,7 +55,6 @@ Route::post('users/preview/back',[PreviewController::class, 'back'])->name('prev
 Route::post('logout',[LoginController::class,'logout'])->name('logout');
 });
 
-Route::get('edit',EditController::class)->name('edit.index');
 Route::get('profiles/index',[ProfileController::class,'index'])->name('profiles.index');
 Route::get('profiles/form',[ProfileController::class,'showForm'])->name('profiles.showForm');
 Route::post('profiles/form/store', [ProfileController::class, 'store'])->name('profiles.store');
