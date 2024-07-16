@@ -75,7 +75,7 @@
         </div>
             <button type="submit" class="btn btn-secondary" >新規登録</button>
     </form>
-    <a  href="{{route('login.index')}}">ログインはこちら</a>
+    <a href="{{route('login.index')}}">ログインはこちら</a>
 </div>
 
 </body>

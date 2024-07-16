@@ -22,6 +22,9 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)){
             $request->session()->regenerate();
 
+            if (Auth::user()->status == 1){
+               return redirect()->route('admin.select');
+            }
             return redirect()->route('file.index');
         }
         return redirect()->route('login.index')->withErrors([

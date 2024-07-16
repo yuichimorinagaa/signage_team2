@@ -35,4 +35,7 @@ class AdminController extends Controller
         }
         return redirect()->route('admin.index');
     }
+    public function select(){
+        return view('admin.select');
+    }
 }
