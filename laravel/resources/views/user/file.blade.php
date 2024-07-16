@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <!-- BootstrapのCSS読み込み -->
+
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- FontAwesomeの読み込み -->
     <link href="https://use.fontawesome.com/releases/v6.5.2/css/all.css" rel="stylesheet">
@@ -16,13 +17,29 @@
 
 </head>
 <header>
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-danger">
-            <i class="fa-solid fa-sign-out-alt"></i> ログアウト
-        </button>
-    </form>
-    <p>File Upload</p>
+    <div class="header-left">
+        <p>File Upload</p>
+    </div>
+    <div class="header-right">
+        <div class="usage">
+            <button onclick="toggleInstructions()" class="btn btn-success"><i class="fa-regular fa-circle-question"></i>使い方</button>
+            <div id="usage-content" class="usage-instructions">
+                <ol class="usage_container">
+                    <li>ファイル選択から画像を選択</li>
+                    <li>アップロードを押して画像をアップロード</li>
+                    <li>サイネージに表示させる画像を選択(複数選択可)</li>
+                    <li>プレビュー画面へ</li>
+                </ol>
+            </div>
+
+        </div>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger">
+                <i class="fa-solid fa-sign-out-alt"></i> ログアウト
+            </button>
+        </form>
+    </div>
 </header>
 <body>
 
@@ -82,19 +99,19 @@
 <div class="image-grid">
 
 
-    @foreach($files as $file)
-        <div class="show_image_container" data-file-id="{{ $file->id }}">
+@foreach($files as $file)
+    <div class="show_image_container" data-file-id="{{ $file->id }}">
 
-            <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
-            <div class="button_array">
+        <img src="{{ asset('storage/image/' . $file->file_path) }}" alt="画像の説明" class="clickable-image">
+        <div class="button_array">
 
 
 
                 <form action="{{ route('file.select') }}" method="POST">
                     @csrf
                     <!-- ボタンを通常のボタンとして扱う -->
-                    <button type="button" class="btn btn-info select-image">
-                        選択
+                    <button type="button" class="select-image choice" title="選択">
+                        <i class="fa-solid fa-circle-plus"></i>
                     </button>
                     <!-- 選択されたファイルのIDを隠しフィールドで送信 -->
                     <input type="hidden" name="selected_files[]" value="{{ $file->id }}">
@@ -152,9 +169,9 @@
                 updateSelectedFilesInput(); // 選択された画像のIDを更新する
                 // ボタンのラベルを切り替える
                 if (container.classList.contains('selected')) {
-                    this.textContent = '選択解除'; // 選択解除のラベルに変更
+                    this.innerHTML ='<i class="fa-regular fa-circle-xmark"></i>'; // 選択解除のラベルに変更
                 } else {
-                    this.textContent = '選択'; // 選択のラベルに変更
+                    this.innerHTML = '<i class="fa-solid fa-circle-plus"></i>'; // 選択のラベルに変更
                 }
             });
         });
@@ -182,8 +199,18 @@
     //jQueryで選択したファイルパスを表示//
     $('input').on('change', function () {
         var file = $(this).prop('files')[0];
-        $('#file-name').text(file.name);
+        $('p').text(file.name);
     });
+    function toggleInstructions() {
+        var instructions =document.getElementById('usage-content');
+        if (instructions.style.display ==='none'){
+            instructions.style.display = 'block';
+            document.querySelector('button');
+        }else{
+            instructions.style.display = 'none';
+            document.querySelector('button');
+        }
+    }
 </script>
 
 
@@ -197,6 +224,7 @@
         flex-wrap: wrap;
         gap: 10px; /* 画像間の隙間 */
         margin-top:50px;
+        padding:0 10px;
     }
 
     .button_array {
@@ -208,8 +236,9 @@
     .show_image_container {
         width: 200px; /* 画像コンテナの幅を統一 */
         height: auto; /* 高さは自動調整 */
-        margin-bottom: 10px; /* コンテナ間の余白を追加 */
+        margin:0 10px 10px 15px; /* コンテナ間の余白を追加 */
         position:relative;
+
     }
 
     .show_image_container img {
@@ -255,6 +284,17 @@
         cursor:pointer; /* カーソルをポインターに */
         font-size:20px;
         color:red;
+    }
+    .choice{
+        border:none;
+        background: none;
+        position:absolute;
+        top:-26px;
+        left:-20px;
+        padding:5px;
+        cursor:pointer;
+        font-size:20px;
+        color:dodgerblue !important;
     }
     .select-image{
         color:white;
@@ -304,7 +344,6 @@
 
     }
     .btn-danger{
-        float:right;
         background-color: rgba(255, 255, 255, 0.3);
         transition:all 0.5s;
         border:none;
@@ -320,10 +359,43 @@
         font-size:30px;
         font-family: "Noto Serif", sans-serif;
         font-weight:bold;
+        margin-left:5px;
+    }
+    .header-left{
+        float:left;
+    }
+    .header-right{
+        float:right;
+        display:flex;
+
     }
     .fa-regular{
         margin-right:5px;
     }
+
+    .usage-instructions{
+        display:none;
+        position:absolute;
+        z-index:1000;
+        border:1px solid #ccc;
+        background-color:#F0F5F9;
+
+    }
+    .btn-success{
+        height:45px;
+        cursor:pointer;
+        margin-right:5px;
+    }
+    .fa-circle-xmark{
+        border:none;
+        background:none;
+        color:dodgerblue;
+
+
+    }
+
+
+
 
 </style>
 </body>

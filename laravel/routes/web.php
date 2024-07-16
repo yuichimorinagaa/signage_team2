@@ -39,6 +39,7 @@ Route::post('login',[LoginController::class,'login'])->name('user.login');
 Route::middleware('auth')->group(function(){
     Route::get('admin',[AdminController::class,'adminShow'])->name('admin.index');
     Route::delete('admin/{id}',[AdminController::class,'delete'])->name('admin.delete');
+    Route::delete('admin/file/{id}', [AdminController::class,'deleteFile'])->name('admin.deleteFile');
     Route::get('users/file',[FileController::class,'index'])->name('file.index');
     Route::get('admin/select',[AdminController::class,'select'])->name('admin.select');
 });
@@ -49,11 +50,11 @@ Route::delete('users/file/{id}', [FileController::class, 'delete'])->name('file.
 Route::post('users/file', [FileController::class,'store'])->name('file.store');
 Route::post('users/file/select', [FileController::class, 'selectFiles'])->name('file.select');
 Route::post('users/file/change', [FileController::class, 'statusChange'])->name('file.statusChange');
-Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index'); Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
+Route::get('users/preview', [PreviewController::class, 'index'])->name('preview.index');
+Route::post('users/preview/update',[PreviewController::class, 'update'])->name('preview.update');
 Route::post('users/preview/back',[PreviewController::class, 'back'])->name('preview.backToUpload');
 Route::post('logout',[LoginController::class,'logout'])->name('logout');
 });
-
 
 Route::get('profiles/index',[ProfileController::class,'index'])->name('profiles.index');
 Route::get('profiles/form',[ProfileController::class,'showForm'])->name('profiles.showForm');
@@ -61,6 +62,14 @@ Route::post('profiles/form/store', [ProfileController::class, 'store'])->name('p
 Route::get('profiles/form/thanks', [ProfileController::class, 'thanks'])->name('profiles.thanks');
 
 Route::get('users/testApi', [UserController::class, 'index'])-> name('testApi');
-//Route::get('/', [UserController::class, 'index']);
+Route::get('/api/weather', [UserController::class, 'fetchWeather'])->name('fetch.weather');
 
+
+Route::get('users/newsApi',[NewsController::class, 'index'])-> name('newsApi');
+Route::get('/api/news', [NewsController::class, 'fetchNews'])->name('fetch.news');
+
+
+Route::get('profiles/indexTwo',[ProfileController::class,'indexTwo'])->name('profiles.index2');
+
+Route::get('signage' ,[SignageController::class,'index'])->name('signage.index');
 

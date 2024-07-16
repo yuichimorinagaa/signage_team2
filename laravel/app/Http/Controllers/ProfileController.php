@@ -13,6 +13,12 @@ class ProfileController extends Controller
         return view('profile.index', compact('profiles'));
     }
 
+    public function indexTwo()
+    {
+        $profiles = Profile::all();
+        return view('profile.index2', compact('profiles'));
+    }
+
     public function showForm()
     {
         return view('profile.form');

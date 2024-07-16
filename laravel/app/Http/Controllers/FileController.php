@@ -71,7 +71,7 @@ class FileController extends Controller
         $files = File::whereIn('id', $selectedFilesArray)->get();
 
         // ビューにファイル情報を渡す
-        return view('user.preview', compact('files'));
+        return redirect()->route('preview.index',compact('files'));
     }
 
 

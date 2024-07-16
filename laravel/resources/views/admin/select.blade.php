@@ -34,6 +34,13 @@
         margin-bottom: 30px;
         width: 100%;
 
+        height:80px;
+        font-size:1.5em !important;
+
+    button {
+        margin-bottom: 30px;
+        width: 100%;
+
         height:65px;
         font-size:1.5em !important;
 
