@@ -42,7 +42,7 @@
             top: 10px;
             left: 20px;
             color: white;
-            font-size: 85px;
+            font-size: 100px;
             font-weight: 300;
             font-family: 'cursive', serif;
             padding: 10px 20px;
@@ -51,11 +51,12 @@
 
         .weather {
             position: absolute;
-            top: 150px;
-            left: 20px;
-            width: 15%;
+            top: 15%;
+            left: 3%;
+            width: 20%;
             border-radius: 5%;
-            background-color: rgba(36, 139, 255, 0.5);
+            font-size: 25px;
+            background-color: rgba(0, 0, 0, 0.5);
             color: white;
             display: flex;
             z-index: 2;
@@ -67,9 +68,19 @@
             padding: 10px;
         }
 
+        .text{
+            font-size:40px;
+        }
+
+        .icon{
+            height: 300px;
+            width: 300px;
+        }
+
         .weather-info{
             flex: 1;
-            padding-top: 30px;
+            font-size: 40px;
+            padding-top: 80px;
             flex-direction: column;
             justify-content: space-evenly;
         }
@@ -180,6 +191,8 @@
             </div>
         </div>
         <!-- 自己紹介カードの表示終わり -->
+
+
     </div>
 
     <script>
@@ -223,8 +236,8 @@
                         } else {
                             $('#weather-info').html(`
                                 <div class="weather-top">
-                                    <p> ${data.description}</p>
-                                    <p><img src="http://openweathermap.org/img/wn/${data.icon}@2x.png" alt="Weather Icon"></p>
+                                    <p class="text"> ${data.description}</p>
+                                    <p><img src="http://openweathermap.org/img/wn/${data.icon}@2x.png" alt="Weather Icon" class="icon"></p>
                                 </div>
                                 <div class="weather-info">
                                     <p>🌡️ ${data.temperature}°C</p>
@@ -298,6 +311,25 @@
             rotateProfiles(); // 初期表示
 
         });
+
+        function goFullscreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'f' || event.key === 'F') {
+                goFullscreen();
+            }
+        });
+
     </script>
 </body>
 </html>
