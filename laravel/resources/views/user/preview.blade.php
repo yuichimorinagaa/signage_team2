@@ -85,9 +85,10 @@
             padding: 10px 20px;
             cursor: pointer;
             color:white;
+            border-radius:5px;
         }
         .form-container button:hover {
-            background-color: gray;
+            background-color:#5a6268;
         }
         .btn-danger{
             background-color: rgba(255, 255, 255, 0.3);
@@ -161,7 +162,7 @@
                         {{ $file->status == 1 ? 'checked' : '' }}>
                 </div>
         @endforeach
-        <button type="submit">変更を適用</button>
+        <button type="submit" class="btn btn-success">変更を適用</button>
         </form>
     </div>
 
