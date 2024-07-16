@@ -65,6 +65,11 @@ Route::get('users/testApi', [UserController::class, 'index'])-> name('testApi');
 Route::get('/api/weather', [UserController::class, 'fetchWeather'])->name('fetch.weather');
 
 
+Route::get('users/newsApi',[NewsController::class, 'index'])-> name('newsApi');
+Route::get('/api/news', [NewsController::class, 'fetchNews'])->name('fetch.news');
+
+
 Route::get('profiles/indexTwo',[ProfileController::class,'indexTwo'])->name('profiles.index2');
 
 Route::get('signage' ,[SignageController::class,'index'])->name('signage.index');
+
