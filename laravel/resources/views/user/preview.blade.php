@@ -66,14 +66,14 @@
             justify-content: center;
         }
         .navigation button {
-            background-color:#606060;
+            background-color:gray;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
             color:white;
         }
         .navigation button:hover {
-            background-color: gray;
+            background-color:darkgray;
         }
         .form-container {
             text-align: center;

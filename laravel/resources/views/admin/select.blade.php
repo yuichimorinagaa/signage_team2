@@ -5,26 +5,38 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- BootstrapのCSS読み込み -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
     <title>Document</title>
 </head>
 <style>
-    .container{
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        padding:20px;
+    body, html {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color:#F0F5F9;
     }
-    .container form{
-        width:100%;
-        max-width:300px;
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:500px;
     }
-    button{
-        margin-bottom:10px;
-        width:100px;
-        font-size:1.2em;
-        padding:15px;
+    .container form {
+        width: 100%;
+        max-width: 400px;
+    }
+    button {
+        margin-bottom: 30px;
+        width: 100%;
+
+        height:65px;
+        font-size:1.5em !important;
+
     }
 </style>
 <body>
