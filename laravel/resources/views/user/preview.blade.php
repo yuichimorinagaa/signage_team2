@@ -164,6 +164,20 @@
         @endforeach
         <button type="submit" class="btn btn-success">変更を適用</button>
         </form>
+        <!-- ニュースジャンル選択フォーム -->
+        <form action="{{ route('fetch.news') }}" method="GET">
+            <label for="category">ニュースジャンルを選択してください：</label>
+            <select name="category" id="category">
+                <option value="business">ビジネス</option>
+                <option value="entertainment">エンターテイメント</option>
+                <option value="general">一般</option>
+                <option value="health">健康</option>
+                <option value="science">科学</option>
+                <option value="sports">スポーツ</option>
+                <option value="technology">技術</option>
+            </select>
+            <button type="submit">表示</button>
+        </form>
     </div>
 
 

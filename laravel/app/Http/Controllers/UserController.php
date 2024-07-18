@@ -31,6 +31,7 @@ class UserController extends Controller
                     'temperature' => $weatherData['main']['temp'],
                     'feels_like' => $weatherData['main']['feels_like'],
                     'humidity' => $weatherData['main']['humidity'],
+
                     'wind_speed' => $weatherData['wind']['speed']
                 ];
 
