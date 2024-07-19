@@ -15,7 +15,7 @@
         body {
             display: flex;  /*フレックスコンテナの指定*/
             flex-direction: column; /*アイテムの配置を上から下に並べる*/
-            height:calc(100vh - 50px); /*50pxだけ引いた残り全部*/
+            height:100vh; /*50pxだけ引いた残り全部*/
             margin: 0; /*デフォルトの余白を除去*/
             background-color:#F0F5F9;
         }
@@ -29,6 +29,7 @@
         }
         #image-list {
             width: 20%;
+            height:calc(100vh - 45px);
             padding: 10px;
             box-sizing: border-box; /*ボックスサイズがボーダー込みになる*/
             overflow-y: auto; /*要素内の内容が要素自体の高さを超えた場合スクロールバー表示*/
@@ -161,7 +162,7 @@
                     <input type="checkbox" name="files[]" value="{{ $file->id }}"
                         {{ $file->status == 1 ? 'checked' : '' }}>
                 </div>
-        @endforeach
+             @endforeach
         <button type="submit" class="btn btn-success">変更を適用</button>
         </form>
     </div>
