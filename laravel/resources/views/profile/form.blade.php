@@ -80,6 +80,7 @@
                 <option value="ISFP">ISFP</option>
                 <option value="ESTP">ESTP</option>
                 <option value="ESFP">ESFP</option>
+                <option value="分からない">分からない</option>
             </select>
         </div>
         <div class="form-group">

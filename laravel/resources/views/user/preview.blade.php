@@ -40,17 +40,19 @@
             aspect-ratio: 16 / 9; /*幅と高さの割合の設定*/
             object-fit: cover; /*要素のボックスにコンテンツを合わせる*/
         }
-        #slideshow-container {
+        .slide {
             width: 100%;
+            height:520px;
             display: flex;
             flex-direction: column;
             align-items: center; /*横の中央*/
             padding:15px 50px;
             box-sizing: border-box;
         }
+
         #slideshow img {
-            max-width: 100%; /*親要素の幅マックス*/
-            max-height: 100%; /*親要素の高さマックス*/
+            width: 100%; /*親要素の幅マックス*/
+            height: 100%; /*親要素の高さマックス*/
             aspect-ratio: 16 / 9;
             object-fit: cover;
             display:flex;
@@ -76,19 +78,17 @@
             background-color:darkgray;
         }
         .form-container {
-            text-align: center;
+            display:flex;
+            flex-direction:column;
+            align-items: center;
             padding: 10px;
         }
-        .form-container button {
-            background-color: gray;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            color:white;
-            border-radius:5px;
+        .form-container button{
+            width:200px !important;
+            height:40px !important;
         }
-        .form-container button:hover {
-            background-color:#5a6268;
+        .signage_button{
+            margin-bottom:5px;
         }
         .btn-danger{
             background-color: rgba(255, 255, 255, 0.3);
@@ -199,10 +199,17 @@
             </div>
         @endif
         <div class="form-container">
-            <form action="{{ route('preview.backToUpload') }}" method="post">
-                @csrf
-                <button class="return-button" type="submit">画像アップロード画面に戻る</button>
-            </form>
+            <div class="signage_button">
+                <form action="{{route('success')}}">
+                    <button class="btn btn-primary">サイネージに表示</button>
+                </form>
+            </div>
+            <div class="return">
+                <form action="{{ route('preview.backToUpload') }}" method="post">
+                    @csrf
+                    <button class="btn btn-secondary" type="submit">画像アップロード画面に戻る</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

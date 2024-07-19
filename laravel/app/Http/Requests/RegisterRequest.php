@@ -33,7 +33,7 @@ class RegisterRequest extends FormRequest
         return [
             'password.min'=>'パスワードは8文字以上で入力してください。',
             'email.unique'=>'このメールアドレスは既に登録されています。',
-            'email.required' => 'メールアドレスは必須です。',
+            'email.required' => 'メールアドレスを入力してください。',
             'email.email'=>'有効なメールアドレスを入力してください。',
             'email.regex'=>'有効なメールアドレスを使用してください',
             'password.required' => 'パスワードを入力してください。',

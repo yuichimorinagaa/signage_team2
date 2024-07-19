@@ -85,4 +85,7 @@ class SignageController extends Controller
             return response()->json(['error' => 'Failed to fetch weather data'], 500);
         }
     }
+    public function success(){
+        return view('signage.success');
+    }
 }
