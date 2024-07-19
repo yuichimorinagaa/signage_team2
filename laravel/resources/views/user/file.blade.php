@@ -199,7 +199,7 @@
     //jQueryで選択したファイルパスを表示//
     $('input').on('change', function () {
         var file = $(this).prop('files')[0];
-        $('p').text(file.name);
+        $('#file-name').text(file.name);
     });
     function toggleInstructions() {
         var instructions =document.getElementById('usage-content');

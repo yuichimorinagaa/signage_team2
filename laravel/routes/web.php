@@ -72,4 +72,4 @@ Route::get('/api/news', [NewsController::class, 'fetchNews'])->name('fetch.news'
 Route::get('profiles/indexTwo',[ProfileController::class,'indexTwo'])->name('profiles.index2');
 
 Route::get('signage' ,[SignageController::class,'index'])->name('signage.index');
-
+Route::get('success',[SignageController::class,'success'])->name('success');

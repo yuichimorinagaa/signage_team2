@@ -103,4 +103,7 @@ class SignageController extends Controller
         // データをJSONで返す
         return response()->json($newsData);
     }
+    public function success(){
+        return view('signage.success');
+    }
 }

@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
     <style>
         .user{
             border-bottom: solid;
@@ -28,8 +28,8 @@
         <form action="{{route('admin.delete',['id'=>$user->id])}}" method="post">
             @method('delete')
             @csrf
-            <button type="button" data-toggle="modal" data-target="#deleteModal{{$user->id}}">
-                ユーザーを削除
+            <button type="button" data-toggle="modal" data-target="#deleteModal{{$user->id}}" class="btn btn-danger">
+                削除
             </button>
 
             <div class="modal fade" id="deleteModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{$user->id}}" aria-hidden="true">
@@ -57,7 +57,7 @@
             </div>
 
         </form>
-        <button type="button" data-toggle="modal" data-target="#imageModal{{$user->id}}">
+        <button type="button" data-toggle="modal" data-target="#imageModal{{$user->id}}" class="btn btn-danger">
             画像を削除
         </button>
 
@@ -90,10 +90,8 @@
         </div>
     </div>
 @endforeach
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+<form action="{{route('file.index')}}">
+    <button class="btn btn-primary">アップロード画面</button>
+</form>
 </body>
 </html>
