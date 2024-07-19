@@ -105,16 +105,16 @@
         }
 
         .profile-top img {
-            width: 80%;
-            height: 80%;
-            margin-top: -20px;
-            margin-bottom: -20px;
+            max-width: 50%;
+            max-height: 50%;
+            margin: 3% 20%;
+            border-radius: 50%;
         }
 
         .name{
-            width: 80%;
+            width: 50%;
             text-align: center;
-            margin-top: -20px;
+            margin: -5% 20%;
         }
 
         .profile-info{
@@ -150,6 +150,7 @@
         @foreach($images as $image)
             <img src="{{ asset('storage/image/' .$image->file_path) }}" alt="">
         @endforeach
+
     </div>
 
     <!-- 天気の表示-->
