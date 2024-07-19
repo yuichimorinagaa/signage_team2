@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Models\File;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 
 class SignageController extends Controller
 {
@@ -46,7 +47,13 @@ class SignageController extends Controller
             return view('user.testApi', ['error' => $e->getMessage()]);
         }
 
-        return view('signage.index', compact('images', 'profiles', 'weather'));
+        //ニュースの表示
+        $response = Http::get('https://newsapi.org/v2/top-headlines?country=jp&category=sports&apiKey=16cb0be0a0be46baae38a3c6a2ebf8fb'); // 実際のAPIエンドポイントに置き換えてください
+        $newsData = $response->json();
+
+        $articles = $newsData['articles'];
+
+        return view('signage.index', ['images' => $images, 'profiles' => $profiles, 'weather' => $weather, 'news' => $articles]);
     }
 
     public function fetchWeather(){
@@ -84,5 +91,16 @@ class SignageController extends Controller
         } catch (Exception $e) {
             return response()->json(['error' => 'Failed to fetch weather data'], 500);
         }
+    }
+    public function fetchNews()
+    {
+        // APIからニュースデータを取得
+        $response = Http::get('https://newsapi.org/v2/top-headlines?country=jp&category=sports&apiKey=16cb0be0a0be46baae38a3c6a2ebf8fb'); // 実際のAPIエンドポイントに置き換えてください
+        $newsData = $response->json();
+
+        $articles = $newsData['articles'];
+
+        // データをJSONで返す
+        return response()->json($newsData);
     }
 }
