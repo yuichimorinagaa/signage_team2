@@ -34,10 +34,10 @@
         margin-bottom: 30px;
         width: 100%;
 
-        height:80px;
-        font-size:1.5em !important;
+        height:65px;
+        font-size:1.5em !important;}
 
-    }
+
 </style>
 <body>
 <div class="container">
@@ -49,7 +49,9 @@
     </form>
     <form action="{{ route('logout') }}" method="POST">
         @csrf
-        <button type="submit" class="btn btn-danger">ログアウト</button>
+        <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-sign-out-alt"></i> ログアウト
+        </button>
     </form>
 </div>
 </body>
