@@ -22,7 +22,8 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required','email','unique:users', 'regex:/@social-db\.co\.jp$/'],
+            'email' => ['required','email','regex:/@social-db\.co\.jp$/'],
+            /**'unique:users', 同一メールアドレスを登録できなくする機能　今は未実装**/
             'password' => ['required','min:8'],
             'invitation_code'=>['required','in:sdb-intern'],
         ];
