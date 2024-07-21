@@ -52,14 +52,58 @@
         }
 
         #slideshow img {
+            position: relative;
             width: 100%; /*親要素の幅マックス*/
             height: 100%; /*親要素の高さマックス*/
             aspect-ratio: 16 / 9;
             object-fit: cover;
             display:flex;
             justify-content:center;
-
         }
+
+        .clock{
+            position: absolute;
+            top: 60px;
+            left: 500px;
+            color: white;
+            background-color: rgba(0, 0, 0, 80%);
+        }
+        .weather{
+            position: absolute;
+            top: 150px;
+            left: 530px;
+            height: 180px;
+            width: 180px;
+            color: white;
+            background-color: rgba(0, 0, 0, 50%);
+            border-radius: 5%;
+            text-align: center;
+        }
+        .profile{
+            position: absolute;
+            top:180px;
+            right: 880px;
+            height: 150px;
+            width: 300px;
+            color: white;
+            background-color: rgba(0, 0, 0, 50%);
+            border: solid 2px;
+            border-radius: 5%;
+            text-align: center;
+        }
+        .news{
+            position: absolute;
+            top:360px;
+            right: 880px;
+            height: 150px;
+            width: 300px;
+            color: white;
+            background-color: rgba(0, 0, 0, 50%);
+            border: solid 2px;
+            border-radius: 5%;
+            text-align: center;
+        }
+
         .message{
             text-align:center;
             vertical-align: center;
@@ -185,6 +229,18 @@
                         </div>
                     @endif
                 @endforeach
+                    <div class="clock">
+                        <h2>12:00</h2>
+                    </div>
+                    <div class="weather">
+                        <p>ここに天気が表示されます</p>
+                    </div>
+                    <div class="profile">
+                        <p>ここに自己紹介が表示されます</p>
+                    </div>
+                    <div class="news">
+                        <p>ここにニュースが表示されます</p>
+                    </div>
                     <div class="message">
                         @if(!$hasSelectedImages)
                             <p>画像が選択されていません</p>

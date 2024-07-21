@@ -42,6 +42,7 @@
             top: 10px;
             left: 20px;
             color: white;
+            background-color: rgba(0, 0, 0, 0.8);
             font-size: 100px;
             font-weight: 300;
             font-family: 'cursive', serif;
@@ -88,7 +89,7 @@
 
         .profile{
             position: absolute;
-            top: 300px;
+            top: 20%;
             right: 100px;
             width: 40%;
             height: 30%;
@@ -105,16 +106,16 @@
         }
 
         .profile-top img {
-            width: 80%;
-            height: 80%;
-            margin-top: -20px;
-            margin-bottom: -20px;
+            max-width: 50%;
+            max-height: 50%;
+            margin: 3% 20%;
+            border-radius: 50%;
         }
 
         .name{
-            width: 80%;
+            width: 50%;
             text-align: center;
-            margin-top: -20px;
+            margin: -5% 20%;
         }
 
         .profile-info{
@@ -141,6 +142,34 @@
             display: block;
         }
 
+        .card-body{
+            position: absolute;
+            top: 120%;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: solid 2px;
+            border-radius: 5%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            align-items: center;
+            z-index: 3;
+        }
+
+        .card-image{
+            flex: 0 0 50%;
+            margin: auto;
+        }
+
+        .card-title{
+            flex: 1;
+            color: white;
+            flex-direction: column;
+            justify-content: space-evenly;
+            text-align: center;
+        }
+
 
     </style>
 </head>
@@ -150,6 +179,7 @@
         @foreach($images as $image)
             <img src="{{ asset('storage/image/' .$image->file_path) }}" alt="">
         @endforeach
+
     </div>
 
     <!-- 天気の表示-->
@@ -192,7 +222,9 @@
         </div>
         <!-- 自己紹介カードの表示終わり -->
 
-
+        <!--ニュースカードの表示-->
+            <div id="news-container" class="card-body"></div>
+        <!--ニュースカードの表示終わり-->
     </div>
 
     <script>
@@ -330,6 +362,33 @@
             }
         });
 
+        <!--ニュースの更新-->
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentNewsIndex = 0;
+            let newsData = @json($news);
+
+            function displayNews(index) {
+                const newsItem = newsData[index];
+                let newsHtml = `
+                    <div class="card-image">
+                        ${newsItem.urlToImage ? `<img src="${newsItem.urlToImage}" alt="ニュースサムネイル">` : '<p>No image available</p>'}
+                    </div>
+                    <h3 class="card-title">
+                         <h>${newsItem.title}</h>
+                    </h3>
+                `;
+                document.getElementById('news-container').innerHTML = newsHtml;
+            }
+
+            function rotateNews() {
+                displayNews(currentNewsIndex);
+                currentNewsIndex = (currentNewsIndex + 1) % newsData.length;
+            }
+
+            setInterval(rotateNews, 60000); // 1分ごとにニュースを変更
+            rotateNews(); // 初回表示
+        });
+            <!--ニュースの更新終わり-->
     </script>
 </body>
 </html>
