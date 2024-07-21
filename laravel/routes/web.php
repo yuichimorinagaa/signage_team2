@@ -73,3 +73,5 @@ Route::get('profiles/indexTwo',[ProfileController::class,'indexTwo'])->name('pro
 
 Route::get('signage' ,[SignageController::class,'index'])->name('signage.index');
 Route::get('success',[SignageController::class,'success'])->name('success');
+Route::get('signage/weatherApi',[SignageController::class,'fetchWeather'])->name('signage.fetchWeather');
+Route::get('signage/news',[SignageController::class,'fetchNews'])->name('signage.fetchNews');

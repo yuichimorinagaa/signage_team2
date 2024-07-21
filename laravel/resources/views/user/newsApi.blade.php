@@ -63,6 +63,33 @@
         setInterval(fetchNewsData, 300000); // 5分ごとにデータを取得
         fetchNewsData(); // 初回データ取得
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        let currentNewsIndex = 0;
+        let newsData = @json($news);
+
+        function displayNews(index) {
+            const newsItem = newsData[index];
+            let newsHtml = `
+                    <div class="card-image">
+                        ${newsItem.urlToImage ? `<img src="${newsItem.urlToImage}" alt="ニュースサムネイル">` : '<p>No image available</p>'}
+                    </div>
+                    <h3 class="card-title">
+                         <h>${newsItem.title}</h>
+                    </h3>
+                `;
+            document.getElementById('news-container').innerHTML = newsHtml;
+        }
+
+        function rotateNews() {
+            displayNews(currentNewsIndex);
+            currentNewsIndex = (currentNewsIndex + 1) % newsData.length;
+        }
+
+        setInterval(rotateNews, 300000); // 5分ごとにニュースを変更
+        rotateNews(); // 初回表示
+    });
+    <!--ニュースの更新終わり-->
 </script>
 </body>
 </html>
