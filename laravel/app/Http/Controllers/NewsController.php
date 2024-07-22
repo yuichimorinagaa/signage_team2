@@ -53,7 +53,7 @@ class NewsController extends Controller
     public function fetchNews()
     {
         if (Cache::has('news')) {
-            return response()->json(Cache::get('news'));
+            return response()->json(Cache::get('news',[]));
         }
 
         try {
@@ -78,10 +78,12 @@ class NewsController extends Controller
                 ]);
             }
 
+
+
             // キャッシュに保存（5分間）
             Cache::put('news', $news, now()->addMinutes(5));
-
             return response()->json($news);
+            //return view('user.newsApi', compact('news'));
 
         } catch (RequestException $e) {
             // Guzzleの例外が発生した場合のエラーハンドリング

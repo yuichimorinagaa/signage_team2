@@ -42,19 +42,23 @@
                     if (data.error) {
                         $('#news-container').html('<p>' + data.error + '</p>');
                     } else {
-                        $('#news-container').html(`
-                        <div class="card-body pt-0 pb-2">
-                            <h3 class="h5 card-title">
-                                <a href="${data.url}" target="_blank">${data.name}</a>
-                            </h3>
-                            <div class="card-text">
-                                ${data.thumbnail ? '<img src="' + data.thumbnail + '" alt="ニュースサムネイル">' : '<p>No Image</p>'}
+                        var newsHtml = '';
+                        data.forEach(function(newsItem) {
+                            newsHtml += `
+                            <div class="card-body pt-0 pb-2">
+                                <h3 class="h5 card-title">
+                                    <a href="${newsItem.url}" target="_blank">${newsItem.name}</a>
+                                </h3>
+                                <div class="card-text">
+                                    ${newsItem.thumbnail ? '<img src="' + newsItem.thumbnail + '" alt="ニュースサムネイル">' : '<p>No Image</p>'}
+                                </div>
+                                <div>
+                                    ${newsItem.description ? newsItem.description : 'No Description'}
+                                </div>
                             </div>
-                            <div>
-                                ${data.description ? data.description : 'No Description'}
-                            </div>
-                        </div>
-                    `);
+                        `;
+                        });
+                        $('#news-container').html(newsHtml);
                     }
                 },
                 error: function() {

@@ -67,7 +67,7 @@ class SignageController extends Controller
         try {
             $url = config('newsapi.news_api_url_3');
             $method = "GET";
-            $id = 1;
+            $count = 1;
 
             $client = new Client();
             $response = $client->request($method, $url);
@@ -77,18 +77,19 @@ class SignageController extends Controller
 
             $news = [];
 
-
+            for ($id = 0; $id < $count; $id++) {
                 array_push($news, [
                     'name' => $articles['articles'][$id]['title'],
                     'url' => $articles['articles'][$id]['url'],
                     'description' => $articles['articles'][$id]['description'],
                     'thumbnail' => $articles['articles'][$id]['urlToImage']
                 ]);
+            }
+
 
 
             // キャッシュに保存（5分間）
             Cache::put('news', $news, now()->addMinutes(5));
-
             return response()->json($news);
 
         } catch (Exception $e) {

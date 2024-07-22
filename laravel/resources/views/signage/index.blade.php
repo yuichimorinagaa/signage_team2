@@ -223,7 +223,7 @@
         <!-- 自己紹介カードの表示終わり -->
 
         <!--ニュースカードの表示-->
-            <div id="news-container" class="card-body"></div>
+        <div id="news-container" class="card-body"></div>
 
         <!--ニュースカードの表示終わり-->
     </div>
@@ -339,30 +339,34 @@
             rotateProfiles();
 
 
+
                 function fetchNewsData() {
                     $.ajax({
-                        url: '{{ route('signage.fetchNews') }}', // ルートで指定したAPIエンドポイント
+                        url: '{{ route('signage.fetchNews') }}',
                         method: 'GET',
                         success: function(data) {
-                            const newsContainer = $('#news-container');
-                            //newsContainer.empty(); // 現在の内容をクリア
+                            console.log('Fetched Data:', data); // データをコンソールに出力して確認
 
                             if (data.error) {
-                                newsContainer.html('<p>' + data.error + '</p>');
+                                $('#news-container').html('<p>' + data.error + '</p>');
                             } else {
-                                // ニュースデータをカードとして追加
-                                data.forEach(news => {
-                                    newsContainer.append(`
-                            <div class="card">
-                                <div class="card-body">
-                                    <p class="news-description">${news.description}</p>
-                                    <p class="news-title">${news.name}</p>
-                                    ${news.thumbnail ? `<img src="${news.thumbnail}" alt="Thumbnail" class="news-thumbnail">` : ''}
-                                    <a href="${news.url}" target="_blank">Read more</a>
+                                var newsHtml = '';
+                                data.forEach(function(newsItem) {
+                                    newsHtml += `
+                            <div class="card-body pt-0 pb-2">
+                                <h3 class="h5 card-title">
+                                    <a href="${newsItem.url}" target="_blank">${newsItem.name}</a>
+                                </h3>
+                                <div class="card-text">
+                                    ${newsItem.thumbnail ? '<img src="' + newsItem.thumbnail + '" alt="ニュースサムネイル">' : '<p>No Image</p>'}
+                                </div>
+                                <div>
+                                    ${newsItem.description ? newsItem.description : 'No Description'}
                                 </div>
                             </div>
-                        `);
+                        `;
                                 });
+                                $('#news-container').html(newsHtml);
                             }
                         },
                         error: function() {
