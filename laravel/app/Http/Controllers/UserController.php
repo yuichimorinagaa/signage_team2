@@ -31,6 +31,7 @@ class UserController extends Controller
                     'temperature' => $weatherData['main']['temp'],
                     'feels_like' => $weatherData['main']['feels_like'],
                     'humidity' => $weatherData['main']['humidity'],
+
                     'wind_speed' => $weatherData['wind']['speed']
                 ];
 
@@ -67,8 +68,8 @@ class UserController extends Controller
                 'icon' => $weatherData['weather'][0]['icon'], // アイコン情報を追加
                 'temperature' => $weatherData['main']['temp'],
                 'feels_like' => $weatherData['main']['feels_like'],
-                'humidity' => $weatherData['main']['humidity'],
-                'wind_speed' => $weatherData['wind']['speed']
+                'humidity' => $weatherData['main']['humidity']
+
             ];
 
             // キャッシュに保存（5分間）

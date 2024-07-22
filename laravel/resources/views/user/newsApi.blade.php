@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+
 <div class="container ">
     @foreach($news as $data)
         <div class="card-body pt-0 pb-2">
@@ -24,6 +25,7 @@
         </div>
     @endforeach
 </div>
+
 <div id="news-container">
 
 </div>
@@ -32,26 +34,27 @@
     $(document).ready(function() {
         function fetchNewsData() {
             $.ajax({
-                url: '{{ route('fetch.news') }}', // APIデータ取得のURL
+                url: '{{ route('fetch.news') }}',
                 method: 'GET',
                 success: function(data) {
+                    console.log('Fetched Data:', data); // データをコンソールに出力して確認
+
                     if (data.error) {
                         $('#news-container').html('<p>' + data.error + '</p>');
                     } else {
-                        // ニュースデータをコンテナーに追加
                         $('#news-container').html(`
-                            <div class="card-body pt-0 pb-2">
-                                <h3 class="h5 card-title">
-                                    <a href="${data.url}" target="_blank">${data.name}</a>
-                                </h3>
-                                <div class="card-text">
-                                    <img src="${data.thumbnail}" alt="ニュースサムネイル">
-                                </div>
-                                <div>
-                                    ${data.description}
-                                </div>
+                        <div class="card-body pt-0 pb-2">
+                            <h3 class="h5 card-title">
+                                <a href="${data.url}" target="_blank">${data.name}</a>
+                            </h3>
+                            <div class="card-text">
+                                ${data.thumbnail ? '<img src="' + data.thumbnail + '" alt="ニュースサムネイル">' : '<p>No Image</p>'}
                             </div>
-                        `);
+                            <div>
+                                ${data.description ? data.description : 'No Description'}
+                            </div>
+                        </div>
+                    `);
                     }
                 },
                 error: function() {

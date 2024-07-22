@@ -14,8 +14,9 @@
 <p><strong>天気:</strong> {{ $weather['description'] }}</p>
 <p><strong>気温:</strong> {{ $weather['temperature'] }} ℃</p>
 <p><strong>体感気温:</strong> {{ $weather['feels_like'] }} ℃</p>
-<p><strong>湿度:</strong> {{ $weather['humidity'] }}%</p>--}}
+<p><strong>湿度:</strong> {{ $weather['humidity'] }}%</p>
 <p><strong>風速:</strong> {{ $weather['wind_speed'] }} m/s</p>
+
 <p>Icon: <img src="http://openweathermap.org/img/wn/{{ $weather['icon'] }}@2x.png" alt="Weather Icon"></p>
 
 
@@ -37,7 +38,6 @@
                                 <p>気温: ${data.temperature}°C</p>
                                 <p>天気: ${data.description}</p>
                                 <p>湿度: ${data.humidity}%</p>
-                                <p>風速: ${data.wind_speed} m/s</p>
                                 <p>Icon<img src="http://openweathermap.org/img/wn/${data.icon}@2x.png" alt="Weather Icon"></p>
                             `);
                     }
