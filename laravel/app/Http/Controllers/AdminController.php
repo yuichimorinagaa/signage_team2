@@ -32,8 +32,8 @@ class AdminController extends Controller
             // 登録日時で降順にソート
             $query->orderBy('created_at', 'desc');
         } else {
-            // デフォルトは登録順（最新の登録が最初）
-            $query->orderBy('created_at', 'desc');
+            // デフォルトは登録順（古い登録が最初）
+            $query->orderBy('created_at', 'asc');
         }
 
         // データの取得とページネーションの適用

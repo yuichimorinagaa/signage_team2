@@ -58,6 +58,10 @@
         font-weight: bold;
         text-decoration: underline;
     }
+    .top-container a.default{
+        font-weight:bold;
+        text-decoration: underline;
+    }
     .top-container .btn-link {
         color: #007bff;
         font-size: 1rem;
@@ -65,6 +69,12 @@
     .top-container .btn-link.active {
         font-weight: bold;
         text-decoration: underline;
+    }
+    .badge{
+        font-size:10px;
+        border:1px solid darkblue;
+        background-color:darkblue;
+        margin-left:5px;
     }
 
 </style>
@@ -86,7 +96,7 @@
 
     <div class="top-container">
         <div>
-            <a href="{{ route('admin.index', ['sort' => 'created_asc']) }}" class="btn btn-link {{ $sort == 'created_asc' ? 'active' : '' }}">登録順（昇順）</a>
+            <a href="{{ route('admin.index', ['sort' => 'created_asc']) }}" class="btn btn-link {{ $sort == 'created_asc' ? 'active' : ($sort == 'default' ? 'default' : '') }}">登録順（昇順）</a>
             <a href="{{ route('admin.index', ['sort' => 'created_desc']) }}" class="btn btn-link {{ $sort == 'created_desc' ? 'active' : '' }}">登録順（降順）</a>
             <a href="{{ route('admin.index', ['sort' => 'email_asc']) }}" class="btn btn-link {{ $sort == 'email_asc' ? 'active' : '' }}">メールアドレス（昇順）</a>
             <a href="{{ route('admin.index', ['sort' => 'email_desc']) }}" class="btn btn-link {{ $sort == 'email_desc' ? 'active' : '' }}">メールアドレス（降順）</a>
@@ -106,7 +116,12 @@
         <tbody>
         @foreach($users as $user)
             <tr>
-                <td>{{$user->email}}</td>
+                <td>
+                    {{$user->email}}
+                    @if($user->status == 1)
+                        <span class="badge badge-primary">管理者</span>
+                    @endif
+                </td>
                 <td>
                     <form action="{{route('admin.delete',['id'=>$user->id])}}" method="post" style="display:inline;">
                         @method('delete')
