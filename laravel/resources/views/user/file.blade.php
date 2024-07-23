@@ -412,8 +412,10 @@
     }
     #usage-content{
         position:absolute;
-        left:-110px;
-        width:300px;
+        left:-130px;
+        width:332px;
+        border-radius:5px;
+        padding:5px;
     }
     .usage{
         position:relative;
