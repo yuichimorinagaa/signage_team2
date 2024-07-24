@@ -39,11 +39,11 @@
 
         .clock {
             position: absolute;
-            top: 10px;
-            left: 20px;
+            top: 2%;
+            left: 3%;
             color: white;
             background-color: rgba(0, 0, 0, 0.8);
-            font-size: 100px;
+            font-size: 400%;
             font-weight: 300;
             font-family: 'cursive', serif;
             padding: 10px 20px;
@@ -74,13 +74,13 @@
         }
 
         .icon{
-            height: 300px;
-            width: 300px;
+            height: 200px;
+            width: 200px;
         }
 
         .weather-info{
             flex: 1;
-            font-size: 40px;
+            font-size: 30px;
             padding-top: 80px;
             flex-direction: column;
             justify-content: space-evenly;
@@ -274,7 +274,7 @@
                                 <div class="weather-info">
                                     <p>🌡️ ${data.temperature}°C</p>
                                     <p>💧 ${data.humidity}%</p>
-                                    <p>༄ ${data.wind_speed} m/s</p>
+                                    <!--<p>༄ ${data.wind_speed} m/s</p>-->
                                 </div>
                             `);
                         }
