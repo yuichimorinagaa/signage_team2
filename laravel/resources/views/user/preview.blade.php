@@ -64,14 +64,14 @@
         .clock{
             position: absolute;
             top: 60px;
-            left: 500px;
+            left: 25%;
             color: white;
             background-color: rgba(0, 0, 0, 80%);
         }
         .weather{
             position: absolute;
             top: 150px;
-            left: 530px;
+            left: 25%;
             height: 180px;
             width: 180px;
             color: white;
@@ -82,7 +82,7 @@
         .profile{
             position: absolute;
             top:180px;
-            right: 880px;
+            right: 15%;
             height: 150px;
             width: 300px;
             color: white;
@@ -94,7 +94,7 @@
         .news{
             position: absolute;
             top:360px;
-            right: 880px;
+            right: 15%;
             height: 150px;
             width: 300px;
             color: white;
