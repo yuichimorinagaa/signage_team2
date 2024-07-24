@@ -41,7 +41,6 @@
         border: none;
     }
     .table-container {
-        margin: 20px;
     }
     .top-container{
         display:flex;
@@ -58,6 +57,10 @@
         font-weight: bold;
         text-decoration: underline;
     }
+    .top-container a.default{
+        font-weight:bold;
+        text-decoration: underline;
+    }
     .top-container .btn-link {
         color: #007bff;
         font-size: 1rem;
@@ -66,19 +69,43 @@
         font-weight: bold;
         text-decoration: underline;
     }
-
+    .badge{
+        font-size:10px;
+        border:1px solid darkblue;
+        background-color:darkblue;
+        margin-left:5px;
+    }
+    .fa-circle-xmark{
+        background: none;
+        border:none;
+        color:red;
+    }
+    .close{
+        background:none;
+        border:none;
+        font-size:20px;
+        margin-left:250px;
+    }
+    .upload{
+        height:45px;
+        margin-right:5px;
+    }
 </style>
 <header>
     <div class="header-left">
         <p>Admin</p>
     </div>
     <div class="header-right">
+        <form action="{{route('file.index')}}" class="form-group">
+            <button class="btn btn-primary upload">アップロード画面</button>
+        </form>
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit" class="btn btn-danger logout">
                 <i class="fa-solid fa-sign-out-alt"></i> ログアウト
             </button>
         </form>
+
     </div>
 </header>
 <body>
@@ -86,7 +113,7 @@
 
     <div class="top-container">
         <div>
-            <a href="{{ route('admin.index', ['sort' => 'created_asc']) }}" class="btn btn-link {{ $sort == 'created_asc' ? 'active' : '' }}">登録順（昇順）</a>
+            <a href="{{ route('admin.index', ['sort' => 'created_asc']) }}" class="btn btn-link {{ $sort == 'created_asc' ? 'active' : ($sort == 'default' ? 'default' : '') }}">登録順（昇順）</a>
             <a href="{{ route('admin.index', ['sort' => 'created_desc']) }}" class="btn btn-link {{ $sort == 'created_desc' ? 'active' : '' }}">登録順（降順）</a>
             <a href="{{ route('admin.index', ['sort' => 'email_asc']) }}" class="btn btn-link {{ $sort == 'email_asc' ? 'active' : '' }}">メールアドレス（昇順）</a>
             <a href="{{ route('admin.index', ['sort' => 'email_desc']) }}" class="btn btn-link {{ $sort == 'email_desc' ? 'active' : '' }}">メールアドレス（降順）</a>
@@ -106,7 +133,12 @@
         <tbody>
         @foreach($users as $user)
             <tr>
-                <td>{{$user->email}}</td>
+                <td>
+                    {{$user->email}}
+                    @if($user->status == 1)
+                        <span class="badge badge-primary">管理者</span>
+                    @endif
+                </td>
                 <td>
                     <form action="{{route('admin.delete',['id'=>$user->id])}}" method="post" style="display:inline;">
                         @method('delete')
@@ -121,9 +153,6 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="deleteModalLabel{{$user->id}}">削除確認</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
                                     </div>
                                     <div class="modal-body">
                                         本当にこのユーザーを削除しますか？
@@ -156,7 +185,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="imageModalLabel">アップロードされた画像</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true"><i class="fa-solid fa-circle-xmark"></i></span>
                 </button>
             </div>
             <div class="modal-body">
@@ -164,11 +193,29 @@
                     @foreach($user->files as $file)
                         <div>
                             <img src="{{ url('storage/image/' . $file->file_path) }}" alt="User Image" style="max-width: 100%;">
-                            <form action="{{route('admin.deleteFile', ['id' => $file->id])}}" method="post" style="display:inline;">
-                                @method('delete')
-                                @csrf
-                                <button type="submit" class="btn btn-danger mt-2">削除</button>
-                            </form>
+                            <button type="button" class="btn btn-danger mt-2" data-toggle="modal" data-target="#deleteImageModal{{$file->id}}">削除</button>
+
+                            <!-- 画像削除確認モーダル -->
+                            <div class="modal fade" id="deleteImageModal{{$file->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteImageModalLabel{{$file->id}}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteImageModalLabel{{$file->id}}">削除確認</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            本当にこの画像を削除しますか？
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+                                            <form action="{{route('admin.deleteFile', ['id' => $file->id])}}" method="post" style="display:inline;">
+                                                @method('delete')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">削除する</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @endforeach
                 @endforeach
@@ -179,6 +226,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- BootstrapおよびjQueryのJS読み込み -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

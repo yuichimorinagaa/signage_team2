@@ -22,13 +22,14 @@
     </div>
     <div class="header-right">
         <div class="usage">
-            <button onclick="toggleInstructions()" class="btn btn-success"><i class="fa-regular fa-circle-question"></i>使い方</button>
+            <button onclick="toggleInstructions()" class="btn btn-success usage-btn"><i class="fa-regular fa-circle-question"></i>使い方</button>
             <div id="usage-content" class="usage-instructions">
                 <ol class="usage_container">
-                    <li>ファイル選択から画像を選択</li>
-                    <li>アップロードを押して画像をアップロード</li>
+                    <li><span class="file-usage"><i class="fa-regular fa-file-image"></i>ファイル選択</span>アップロードしたい画像を選択</li>
+                    <li><span class="upload-usage"><i class="fa-solid fa-upload"></i>アップロード</span>画像をアップロード</li>
                     <li>サイネージに表示させる画像を選択(複数選択可)</li>
-                    <li>プレビュー画面へ</li>
+                    <li><i class="fa-solid fa-circle-plus"></i>選択　<i class="fa-regular fa-circle-xmark"></i>選択解除　<i class="fa-solid fa-circle-minus"></i>画像を削除</li>
+                    <li><span class="preview-usage"><i class="fa-regular fa-circle-play"></i>プレビュー</span>プレビュー画面へ</li>
                 </ol>
             </div>
 
@@ -393,7 +394,32 @@
 
 
     }
-
+    .fa-circle-minus{
+        color:red;
+    }
+    .fa-circle-plus{
+        color:dodgerblue;
+    }
+    li{
+        padding-bottom: 5px;
+    }
+    li span{
+        color:white;
+        background-color:dodgerblue;
+        border-radius:0.375rem;
+        border-color:dodgerblue;
+        padding:2px;
+    }
+    #usage-content{
+        position:absolute;
+        left:-130px;
+        width:332px;
+        border-radius:5px;
+        padding:5px;
+    }
+    .usage{
+        position:relative;
+    }
 
 
 
