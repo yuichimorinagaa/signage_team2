@@ -223,7 +223,8 @@
         <!-- 自己紹介カードの表示終わり -->
 
         <!--ニュースカードの表示-->
-            <div id="news-container" class="card-body"></div>
+        <div id="news-container" class="card-body"></div>
+
         <!--ニュースカードの表示終わり-->
     </div>
 
@@ -256,11 +257,10 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        <!-- 天気の表示 -->
         $(document).ready(function() {
             function fetchWeatherData() {
                 $.ajax({
-                    url: '{{ route('fetch.weather') }}', // APIデータ取得のURL
+                    url: '{{ route('signage.fetchWeather') }}', // APIデータ取得のURL
                     method: 'GET',
                     success: function(data) {
                         if (data.error) {
@@ -287,10 +287,7 @@
 
             setInterval(fetchWeatherData, 300000); // 5分ごとにデータを取得
             fetchWeatherData(); // 初回データ取得
-        });
-        <!-- 天気の表示終わり -->
 
-        document.addEventListener("DOMContentLoaded", function() {
             let profiles = @json($profiles);
 
             profiles = profiles.map(profile => {
@@ -300,8 +297,7 @@
                 };
             });
 
-
-            let currentIndex = 0;
+            let currentProfileIndex = 0;
             let currentSectionIndex = 0;
             const sections = document.querySelectorAll('.profile-info > div');
             sections[currentSectionIndex].classList.add('visible');
@@ -324,12 +320,12 @@
                 document.getElementById('profile-club-activities').textContent = profile.club_activities;
                 document.getElementById('profile-famous-person').textContent = profile.famous_person;
                 document.getElementById('profile-artists').textContent = profile.artists;
-                document.getElementById('profile-if-ceo').textContent = profile.if_ceo;
+                document.getElementById('profile-if_ceo').textContent = profile.if_ceo;
             }
 
             function rotateProfiles() {
-                showProfile(currentIndex);
-                currentIndex = (currentIndex + 1) % profiles.length;
+                showProfile(currentProfileIndex);
+                currentProfileIndex = (currentProfileIndex + 1) % profiles.length;
             }
 
             function rotateSections() {
@@ -338,57 +334,52 @@
                 sections[currentSectionIndex].classList.add('visible');
             }
 
-            setInterval(rotateProfiles, 30000); // 15秒ごとにプロフィールを変更
-            setInterval(rotateSections, 10000)
-            rotateProfiles(); // 初期表示
+            setInterval(rotateProfiles, 60000);
+            setInterval(rotateSections, 10000);
+            rotateProfiles();
+
+
+
+                function fetchNewsData() {
+                    $.ajax({
+                        url: '{{ route('signage.fetchNews') }}',
+                        method: 'GET',
+                        success: function(data) {
+                            console.log('Fetched Data:', data); // データをコンソールに出力して確認
+
+                            if (data.error) {
+                                $('#news-container').html('<p>' + data.error + '</p>');
+                            } else {
+                                var newsHtml = '';
+                                data.forEach(function(newsItem) {
+                                    newsHtml += `
+                            <div class="card-body pt-0 pb-2">
+                                <h3 class="h5 card-title">
+                                    <a href="${newsItem.url}" target="_blank">${newsItem.name}</a>
+                                </h3>
+                                <div class="card-text">
+                                    ${newsItem.thumbnail ? '<img src="' + newsItem.thumbnail + '" alt="ニュースサムネイル">' : '<p>No Image</p>'}
+                                </div>
+                                <div>
+                                    ${newsItem.description ? newsItem.description : 'No Description'}
+                                </div>
+                            </div>
+                        `;
+                                });
+                                $('#news-container').html(newsHtml);
+                            }
+                        },
+                        error: function() {
+                            $('#news-container').html('<p>ニュースデータの取得に失敗しました。</p>');
+                        }
+                    });
+                }
+
+                setInterval(fetchNewsData, 300000); // 5分ごとにデータを取得
+                fetchNewsData(); // 初回データ取得
+
 
         });
-
-        function goFullscreen() {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
-            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-                document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
-                document.documentElement.webkitRequestFullscreen();
-            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-                document.documentElement.msRequestFullscreen();
-            }
-        }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'f' || event.key === 'F') {
-                goFullscreen();
-            }
-        });
-
-        <!--ニュースの更新-->
-        document.addEventListener('DOMContentLoaded', function() {
-            let currentNewsIndex = 0;
-            let newsData = @json($news);
-
-            function displayNews(index) {
-                const newsItem = newsData[index];
-                let newsHtml = `
-                    <div class="card-image">
-                        ${newsItem.urlToImage ? `<img src="${newsItem.urlToImage}" alt="ニュースサムネイル">` : '<p>No image available</p>'}
-                    </div>
-                    <h3 class="card-title">
-                         <h>${newsItem.title}</h>
-                    </h3>
-                `;
-                document.getElementById('news-container').innerHTML = newsHtml;
-            }
-
-            function rotateNews() {
-                displayNews(currentNewsIndex);
-                currentNewsIndex = (currentNewsIndex + 1) % newsData.length;
-            }
-
-            setInterval(rotateNews, 60000); // 1分ごとにニュースを変更
-            rotateNews(); // 初回表示
-        });
-            <!--ニュースの更新終わり-->
     </script>
 </body>
 </html>

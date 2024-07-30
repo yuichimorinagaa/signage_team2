@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\NewsController;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,3 +74,7 @@ Route::get('profiles/indexTwo',[ProfileController::class,'indexTwo'])->name('pro
 
 Route::get('signage' ,[SignageController::class,'index'])->name('signage.index');
 Route::get('success',[SignageController::class,'success'])->name('success');
+Route::get('signage/weatherApi',[SignageController::class,'fetchWeather'])->name('signage.fetchWeather');
+Route::get('signage/news',[SignageController::class,'fetchNews'])->name('signage.fetchNews');
+
+Route::get('/clear-cache', function() {Cache::flush();return 'Cache cleared';});
